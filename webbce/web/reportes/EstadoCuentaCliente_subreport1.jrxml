@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstadoCuentaCliente_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.9965000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CodAnexo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[declare @idanexo int, @idEmpresa int,@codanexo varchar(20)
+set @codanexo = $P{CodAnexo}
+set @idanexo = (select dbo.anexo.idanexo from anexo where dbo.anexo.codanexo = @codanexo)
+set @idempresa = 1
+
+SELECT TOP 10
+dbo.Documento.FechaEmision,
+CASE WHEN Documento.IdDocumento = 0 THEN Documento.CodDocumento ELSE CASE WHEN Documento.IdDocumentoSerie <> 0 THEN DocumentoSerie.CodDocumentoSerie
++ '-' ELSE ISNULL(Documento.SerieDocumento + '-', '') END + Documento.CodDocumento END AS CodDocumento,dbo.DocumentoTipo.CodDocumentoTipo, 
+CASE WHEN IdAnexo_Emisor = 0 THEN NULL ELSE Anexo_Emisor.CodAnexoVenta END AS CodAnexo_Emisor, 
+CASE WHEN IdAnexo_Concesionario = 0 THEN NULL ELSE Anexo_Concesionario.CodAnexo END AS CodAnexo_Concesionario,
+CASE WHEN dbo.Documento.IdAnexo_Concesionario <> 0 THEN Anexo_Concesionario.NomAnexo ELSE CASE WHEN dbo.Documento.IdAnexo_Emisor <>
+0 THEN Anexo_Emisor.NomAnexo ELSE CASE WHEN dbo.Documento.Referencia IS NULL OR
+dbo.Documento.Referencia = '' THEN dbo.DocumentoTipo.NomDocumentoTipo ELSE dbo.Documento.Referencia END END END AS Descripcion, 
+CASE WHEN dbo.DocumentoTipo.EsInverso = 1 THEN - dbo.funObtenerMontoRestanteDocumentoCuota(dbo.Documento.IdDocumento, 
+dbo.DocumentoCuota.NroCuota, dbo.CreditoPeriodo.FechaInicio) ELSE dbo.funObtenerMontoRestanteDocumentoCuota(dbo.Documento.IdDocumento, 
+dbo.DocumentoCuota.NroCuota, dbo.CreditoPeriodo.FechaInicio) END AS Importe, 
+
+
+CASE WHEN (dbo.DocumentoCuota.MontoCuota - dbo.DocumentoCuota.MontoCuotaCancelado) 
+= 0 THEN dbo.Documento.NroCuota - dbo.DocumentoCuota.NroCuota ELSE dbo.Documento.NroCuota - dbo.DocumentoCuota.NroCuota + 1 END AS NroCuota
+,
+CASE WHEN dbo.DocumentoTipo.EsInverso = 1 THEN - (dbo.DocumentoCuota.MontoCuota - dbo.DocumentoCuota.MontoCuotaCancelado) 
+ELSE (dbo.DocumentoCuota.MontoCuota - dbo.DocumentoCuota.MontoCuotaCancelado) END AS MontoCuota, 1 AS Tipo, 
+dbo.Documento.FechaEmision AS FechaOrden
+FROM         dbo.Documento  (NOLOCK)  INNER JOIN
+dbo.DocumentoCuota (NOLOCK)  ON dbo.Documento.IdDocumento = dbo.DocumentoCuota.IdDocumento INNER JOIN
+dbo.DocumentoTipo (NOLOCK)  ON CASE WHEN Documento.IdDocumentoTipo = dbo.fneIdDocumentoTipo('TRDA') THEN Documento.IdDocumentoTipo_Referencia ELSE Documento.IdDocumentoTipo END  = dbo.DocumentoTipo.IdDocumentoTipo INNER JOIN
+dbo.DocumentoSerie (NOLOCK)  ON dbo.Documento.IdDocumentoSerie = dbo.DocumentoSerie.IdDocumentoSerie INNER JOIN
+dbo.Anexo Anexo_Concesionario  (NOLOCK)  ON dbo.Documento.IdAnexo_Concesionario = Anexo_Concesionario.IdAnexo INNER JOIN
+dbo.Anexo Anexo_Emisor (NOLOCK)  ON dbo.Documento.IdAnexo_Emisor = Anexo_Emisor.IdAnexo INNER JOIN
+dbo.CreditoPeriodo (NOLOCK)  ON dbo.Documento.FechaEmision < dbo.CreditoPeriodo.FechaInicio
+INNER JOIN
+dbo.DocumentoTipoFamiliaTD(NOLOCK)  ON dbo.DocumentoTipo.IdDocumentoTipoFamilia = dbo.DocumentoTipoFamiliaTD.IdDocumentoTipoFamilia   
+WHERE     (dbo.Documento.Total - dbo.Documento.MontoCancelado + dbo.DocumentoCuota.MontoCuota - dbo.DocumentoCuota.MontoCuotaCancelado <> 0) AND 
+(dbo.CreditoPeriodo.IdCreditoPeriodo = dbo.fneCreditoPeriodo(GETDATE(), @IdEmpresa)) AND (dbo.Documento.IdAnexo_ClienteProveedor = @IdAnexo) AND 
+(dbo.DocumentoCuota.FechaVencimiento BETWEEN dbo.CreditoPeriodo.FechaInicio AND dbo.CreditoPeriodo.FechaFin) AND (dbo.Documento.IdEstado not in (dbo.funObtenerEstado('CANCELADO') , dbo.funObtenerEstado('ANULADO'))) AND (dbo.DocumentoTipoFamiliaTD.CodDocumentoTipoFamilia IN ('OV' , 'CV', 'NV', 'CCL'))  
+UNION ALL
+SELECT     NULL AS FechaEmision, NULL AS CodDocumentoTipo, NULL AS CodDocumento, NULL AS CodAnexo_Emisor, NULL AS CodAnexo_Concesionario, NULL 
+AS Descripcion, NULL AS Importe, NULL AS NroCuota, NULL AS MontoCuota, 2 AS Tipo, FechaInicio AS FechaOrden
+FROM         dbo.CreditoPeriodo (NOLOCK) 
+WHERE     (IdCreditoPeriodo = dbo.fneCreditoPeriodo(GETDATE(), @IdEmpresa))
+UNION ALL
+SELECT     dbo.Documento.FechaEmision, dbo.DocumentoTipo.CodDocumentoTipo, 
+CASE WHEN Documento.IdDocumento = 0 THEN Documento.CodDocumento ELSE CASE WHEN Documento.IdDocumentoSerie <> 0 THEN DocumentoSerie.CodDocumentoSerie
++ '-' ELSE ISNULL(Documento.SerieDocumento + '-', '') END + Documento.CodDocumento END AS CodDocumento, 
+CASE WHEN IdAnexo_Emisor = 0 THEN NULL ELSE Anexo_Emisor.CodAnexoVenta END AS CodAnexo_Emisor, 
+CASE WHEN IdAnexo_Concesionario = 0 THEN NULL ELSE Anexo_Concesionario.CodAnexo END AS CodAnexo_Concesionario, 
+dbo.DocumentoProducto.Descripcion, 
+CASE WHEN dbo.DocumentoTipo.EsInverso = 1 THEN - fntDocumentoCuotaProducto_Importe.Importe ELSE fntDocumentoCuotaProducto_Importe.Importe
+END AS Importe, 
+CASE WHEN dbo.DocumentoCuotaProducto.MontoCuota - dbo.DocumentoCuotaProducto.MontoCuotaCancelado = 0 THEN dbo.Documento.NroCuota - 1 ELSE
+dbo.Documento.NroCuota END AS NroCuota, 
+CASE WHEN dbo.DocumentoTipo.EsInverso = 1 THEN - (dbo.DocumentoCuotaProducto.MontoCuota - dbo.DocumentoCuotaProducto.MontoCuotaCancelado)
+ELSE (dbo.DocumentoCuotaProducto.MontoCuota - dbo.DocumentoCuotaProducto.MontoCuotaCancelado) END AS MontoCuota, 3 AS Tipo, 
+dbo.Documento.FechaEmision AS FechaOrden
+FROM         dbo.DocumentoProducto WITH (NOLOCK) INNER JOIN
+dbo.Documento WITH (NOLOCK) INNER JOIN
+dbo.DocumentoCuota WITH (NOLOCK) ON dbo.Documento.IdDocumento = dbo.DocumentoCuota.IdDocumento INNER JOIN
+dbo.DocumentoTipo WITH (NOLOCK) ON CASE WHEN Documento.IdDocumentoTipo = dbo.fneIdDocumentoTipo('TRDA') 
+THEN Documento.IdDocumentoTipo_Referencia ELSE Documento.IdDocumentoTipo END = dbo.DocumentoTipo.IdDocumentoTipo INNER JOIN
+dbo.DocumentoSerie WITH (NOLOCK) ON dbo.Documento.IdDocumentoSerie = dbo.DocumentoSerie.IdDocumentoSerie INNER JOIN
+dbo.Anexo Anexo_Concesionario ON dbo.Documento.IdAnexo_Concesionario = Anexo_Concesionario.IdAnexo INNER JOIN
+dbo.Anexo Anexo_Emisor ON dbo.Documento.IdAnexo_Emisor = Anexo_Emisor.IdAnexo INNER JOIN
+dbo.DocumentoCuotaProducto WITH (NOLOCK) ON dbo.DocumentoCuota.IdDocumentoCuota = dbo.DocumentoCuotaProducto.IdDocumentoCuota ON 
+dbo.DocumentoProducto.IdDocumentoProducto = dbo.DocumentoCuotaProducto.IdDocumentoProducto INNER JOIN
+dbo.fntDocumentoCuotaProducto_Importe(@IdAnexo) fntDocumentoCuotaProducto_Importe ON 
+dbo.DocumentoProducto.IdDocumentoProducto =                      fntDocumentoCuotaProducto_Importe.IdDocumentoProducto CROSS JOIN
+dbo.CreditoPeriodo WITH (NOLOCK) INNER JOIN
+dbo.DocumentoTipoFamiliaTD WITH (NOLOCK) ON 
+dbo.DocumentoTipo.IdDocumentoTipoFamilia = dbo.DocumentoTipoFamiliaTD.IdDocumentoTipoFamilia
+WHERE     (dbo.CreditoPeriodo.IdCreditoPeriodo = dbo.fneCreditoPeriodo(GETDATE(), @IdEmpresa)) AND (dbo.Documento.IdAnexo_ClienteProveedor = @Idanexo) AND 
+(dbo.Documento.FechaEmision BETWEEN dbo.CreditoPeriodo.FechaInicio AND dbo.CreditoPeriodo.FechaFin) AND (dbo.DocumentoCuota.NroCuota = 1) 
+AND (dbo.Documento.IdEstado NOT IN (dbo.funObtenerEstado('CANCELADO'), dbo.funObtenerEstado('ANULADO'))) AND 
+(dbo.DocumentoTipoFamiliaTD.CodDocumentoTipoFamilia IN ('OV', 'CV', 'NV', 'CCL')) AND 
+(fntDocumentoCuotaProducto_Importe.Importe + dbo.DocumentoCuotaProducto.MontoCuota - dbo.DocumentoCuotaProducto.MontoCuotaCancelado <> 0) 
+ORDER BY FechaOrden, Tipo, CodDocumento]]>
+	</queryString>
+	<field name="FechaEmision" class="java.sql.Timestamp"/>
+	<field name="CodDocumento" class="java.lang.String"/>
+	<field name="CodDocumentoTipo" class="java.lang.String"/>
+	<field name="CodAnexo_Emisor" class="java.lang.String"/>
+	<field name="CodAnexo_Concesionario" class="java.lang.String"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Importe" class="java.math.BigDecimal"/>
+	<field name="NroCuota" class="java.lang.Integer"/>
+	<field name="MontoCuota" class="java.math.BigDecimal"/>
+	<field name="Tipo" class="java.lang.Integer"/>
+	<field name="FechaOrden" class="java.sql.Timestamp"/>
+	<variable name="Tot_Impoete" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Importe}]]></variableExpression>
+	</variable>
+	<variable name="Tot_Descp" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{MontoCuota}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="3" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="0" width="32" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="0" width="57" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="0" width="40" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PVENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="0" width="151" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="0" width="55" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="-1" width="31" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="0" width="49" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NTA. VENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="458" y="1" width="60" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DES PROYEC]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="10" width="505" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="13" y="0" width="43" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="56" y="0" width="57" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CodDocumentoTipo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="163" y="0" width="44" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CodAnexo_Emisor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="213" y="-1" width="151" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="366" y="-1" width="55" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Importe}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="427" y="-1" width="31" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NroCuota}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="113" y="0" width="50" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CodDocumento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="464" y="-1" width="53" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MontoCuota}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="1" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="286" y="1" width="56" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TOTAL S/.]]></text>
+			</staticText>
+			<textField pattern="##0.00" isBlankWhenNull="true">
+				<reportElement x="368" y="0" width="50" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Tot_Impoete}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##0.00" isBlankWhenNull="true">
+				<reportElement x="466" y="0" width="51" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Tot_Descp}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="266" y="1" width="250" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

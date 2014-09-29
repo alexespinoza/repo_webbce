@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AnexoWeb_DetalleRegistro" language="groovy" pageWidth="430" pageHeight="340" columnWidth="390" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CodAnexo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT CodAnexo, Apellidos, Nombres, Documento, Direccion, email, Telefono, rpm_rpc, Celular, PreguntaSeguridad,PalabraClave,
+ CodigoSeguridad,  CONVERT(NVARCHAR,FechaHora,103) + '-'+ HORA FechaHora
+
+FROM         AnexoWeb
+WHERE CodAnexo = $P{CodAnexo}]]>
+	</queryString>
+	<field name="CodAnexo" class="java.lang.String"/>
+	<field name="Apellidos" class="java.lang.String"/>
+	<field name="Nombres" class="java.lang.String"/>
+	<field name="Documento" class="java.lang.String"/>
+	<field name="Direccion" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="Telefono" class="java.lang.String"/>
+	<field name="rpm_rpc" class="java.lang.String"/>
+	<field name="Celular" class="java.lang.String"/>
+	<field name="PreguntaSeguridad" class="java.lang.String"/>
+	<field name="PalabraClave" class="java.lang.String"/>
+	<field name="CodigoSeguridad" class="java.lang.String"/>
+	<field name="FechaHora" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="392" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[	RESUSMEN REGISTRO  - BAZAR CENTRAL ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="271" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="26" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="46" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="66" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DNI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="86" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="106" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="126" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="146" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RPM/RPC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="166" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Celular:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="185" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PreguntaSeguridad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="207" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Palabra Clave:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="227" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CodigoSeguridad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="247" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha/Hora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="142" y="5" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CodAnexo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="26" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="46" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="66" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="86" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="106" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="126" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="146" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rpm_rpc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="166" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="185" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PreguntaSeguridad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="207" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PalabraClave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="227" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CodigoSeguridad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="247" width="251" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FechaHora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="5" width="127" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Administrativo:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>

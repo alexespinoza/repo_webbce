@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Simple Fade Slideshow Theme - Jssor Slider, Slideshow with Javascript Source Code</title>
+</head>
+<body style="font-family:Arial, Verdana;background-color:#fff;">
+    <script type="text/javascript" src="js/jquery"></script>
+    <script type="text/javascript" src="js/jssor.core.js"></script>
+    <script type="text/javascript" src="js/jssor.utils.js"></script>
+    <script type="text/javascript" src="js/jssor.slider.js"></script>
+    <script>
+
+        jQuery(document).ready(function ($) {
+
+            var _SlideshowTransitions = [
+            //Fade
+            { $Duration: 1200, $Opacity: 2 }
+            ];
+            var options = {
+                $AutoPlay: true, 
+                $AutoPlaySteps: 1,
+                $AutoPlayInterval: 3000,
+                $PauseOnHover: 1,
+                $ArrowKeyNavigation: true, 
+                $SlideDuration: 500,   
+                $MinDragOffsetToSlide: 20, 
+                $SlideSpacing: 0, 
+                $DisplayPieces: 1, 
+                $ParkingPosition: 0, 
+                $UISearchMode: 1, 
+                $PlayOrientation: 1, 
+                $DragOrientation: 3, 
+                $SlideshowOptions: {                                
+                    $Class: $JssorSlideshowRunner$,   
+                    $Transitions: _SlideshowTransitions,            
+                    $TransitionsOrder: 1, 
+                    $ShowLink: true 
+                },
+                $BulletNavigatorOptions: {                               
+                    $Class: $JssorBulletNavigator$,                     
+                    $ChanceToShow: 2,                               
+                    $AutoCenter: 1,                                 
+                    $Steps: 1,                                      
+                    $Lanes: 1,                                      
+                    $SpacingX: 10,                                   
+                    $SpacingY: 10,                                   
+                    $Orientation: 1                                 
+                },
+
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$,             
+                    $ChanceToShow: 2,                              
+                    $Steps: 1                                       
+                }
+            };
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+            function ScaleSlider() {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth)
+                    jssor_slider1.$SetScaleWidth(Math.min(parentWidth, 600));
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+
+            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+                $(window).bind('resize', ScaleSlider);
+            }
+
+        });
+    </script>
+<style type="text/css">
+.captionOrange, .captionBlack{color: #fff;font-size: 20px;line-height: 30px;text-align: center;border-radius: 4px;}
+.captionOrange{background: #EB5100;background-color: rgba(235, 81, 0, 0.6);}
+.captionBlack{font-size:16px;background: #000;background-color: rgba(0, 0, 0, 0.4);}
+a.captionOrange, A.captionOrange:active, A.captionOrange:visited{color: #ffffff;text-decoration: none;}
+a.captionOrange:hover{color: #eb5100;text-decoration: underline;background-color: #eeeeee;background-color: rgba(238, 238, 238, 0.7);}
+</style>
+<div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 300px; overflow: hidden;">
+<div>
+<img u="image" src="images/tdas/02.jpg" />
+<div  t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+mobile ready, touch swipe
+</div>
+</div>
+<div>
+<img u="image" src="images/tdas/03.jpg" />
+<div  t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+mobile ready, touch swipe
+</div>
+</div>
+<div>
+<img u="image" src="images/tdas/04.jpg" />
+<div  t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+mobile ready, touch swipe
+</div>
+</div>
+<div>
+<img u="image" src="images/tdas/05.jpg" />
+<div  t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+mobile ready, touch swipe
+</div>
+</div>
+<div>
+<img u="image" src="images/tdas/06.jpg" />
+</div>
+<div>
+<img u="image" src="images/tdas/07.jpg" />
+</div>
+<div>
+<img u="image" src="images/tdas/08.jpg" />
+</div>
+<div>
+<img u="image" src="images/tdas/09.jpg" />
+</div>
+<div>
+<img u="image" src="images/tdas/10.jpg" />
+</div>
+<div>
+<img u="image" src="images/tdas/11.jpg" />
+</div>
+</div>
+
+        <!-- Bullet Navigator Skin Begin -->
+<style>
+.jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {background: url(../img/b05.png) no-repeat;overflow: hidden;cursor: pointer;}
+.jssorb05 div {background-position: -7px -7px;}
+.jssorb05 div:hover, .jssorb05 .av:hover {background-position: -37px -7px;}
+.jssorb05 .av {background-position: -67px -7px;}
+.jssorb05 .dn, .jssorb05 .dn:hover {background-position: -97px -7px;}
+</style>
+                            <!-- bullet navigator container -->
+                            <div u="navigator" class="jssorb05" style="position: absolute; bottom: 16px; right: 6px;">
+                            <!-- bullet navigator item prototype -->
+                            <div u="prototype" style="POSITION: absolute; WIDTH: 16px; HEIGHT: 16px;"></div>
+                            </div>
+
+<style>
+.jssora12l, .jssora12r, .jssora12ldn, .jssora12rdn {position: absolute;cursor: pointer;display: block;background: url(../img/a12.png) no-repeat;overflow: hidden;}
+.jssora12l {background-position: -16px -37px;}
+.jssora12r {background-position: -75px -37px;}
+.jssora12l:hover {background-position: -136px -37px;}
+.jssora12r:hover {background-position: -195px -37px;}
+.jssora12ldn {background-position: -256px -37px;}
+.jssora12rdn {background-position: -315px -37px;}
+</style>
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora12l" style="width: 30px; height: 46px; top: 123px; left: 0px;">
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora12r" style="width: 30px; height: 46px; top: 123px; right: 0px">
+        </span>
+        <!-- Arrow Navigator Skin End -->
+        <a style="display: none" href="http://www.jssor.com">javascript</a>
+   
+</body>
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket de Precios BCE" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="IdAnexo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT     TOP 100 PERCENT
+dbo.Producto.CodigoBarra,	dbo.Producto.Marcaza,	dbo.Producto.NomProductoCorto,	dbo.UnidadMedida.CodUnidadMedida,	dbo.Producto.RzTrans, 
+	ROUND(dbo.Producto.ValorVenta * CASE WHEN DocumentoTipoColumnaTD.TipoDocumentoTipoColumna = 'AFECTO' THEN 1 + SistemaParametro.PIGV ELSE 1 END, 2) AS PrecioVenta
+FROM         dbo.ProductoLoteStock (NOLOCK) INNER JOIN
+                      dbo.ProductoLote (NOLOCK) ON dbo.ProductoLoteStock.IdProductoLote = dbo.ProductoLote.IdProductoLote INNER JOIN
+                      dbo.Producto (NOLOCK) ON dbo.ProductoLote.IdProducto = dbo.Producto.IdProducto INNER JOIN
+                      dbo.ProductoSubLinea (NOLOCK) ON dbo.ProductoSubLinea.IdProductoSubLinea = dbo.Producto.IdProductoSubLinea INNER JOIN
+                      dbo.UnidadMedida ON dbo.Producto.IdUnidadMedida = dbo.UnidadMedida.IdUnidadMedida INNER JOIN
+                      dbo.DocumentoTipoColumnaTD ON dbo.Producto.IdDocumentoTipoColumna = dbo.DocumentoTipoColumnaTD.IdDocumentoTipoColumna CROSS JOIN
+                      dbo.SistemaParametro
+WHERE    (dbo.SistemaParametro.IdSistemaParametro = 0) AND 
+	(dbo.ProductoLoteStock.IdAnexo_Area = $P{IdAnexo} ) AND 
+	(dbo.ProductoLoteStock.Stock <> 0)  
+ORDER BY dbo.Producto.CodProducto]]>
+	</queryString>
+	<field name="CodigoBarra" class="java.lang.String"/>
+	<field name="Marcaza" class="java.lang.String"/>
+	<field name="NomProductoCorto" class="java.lang.String"/>
+	<field name="CodUnidadMedida" class="java.lang.String"/>
+	<field name="RzTrans" class="java.math.BigDecimal"/>
+	<field name="PrecioVenta" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="66" splitType="Stretch">
+			<rectangle>
+				<reportElement x="16" y="0" width="222" height="64"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="18" y="1" width="220" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CodigoBarra}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="23" y="28" width="72" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Marcaza}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="23" y="18" width="215" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NomProductoCorto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="23" y="40" width="72" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CodUnidadMedida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##0.00" isBlankWhenNull="true">
+				<reportElement x="136" y="22" width="100" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial Black" size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PrecioVenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="95" y="29" width="41" height="33"/>
+				<textElement>
+					<font fontName="Arial" size="25" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[S/.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="28">
+			<textField>
+				<reportElement x="432" y="0" width="80" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="0" width="40" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
