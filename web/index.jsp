@@ -12,6 +12,9 @@ if(request.getParameter("content")!=null){
 nombre =  "paginas/inicio.jsp";
 }
 
+
+  
+      
 %>
 <jsp:include page="<%=nombre%>" flush="true"/> 
 <jsp:include page="paginas/footer.jsp" flush="true"/>
