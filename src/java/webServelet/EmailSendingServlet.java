@@ -1,4 +1,4 @@
-package net.codejava.email;
+package webServelet;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

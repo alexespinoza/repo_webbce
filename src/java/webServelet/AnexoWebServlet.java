@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Model.dao.AnexoWebDao;
 import javax.servlet.ServletContext;
-import net.codejava.email.EmailUtility;
 import org.apache.log4j.Logger;
 import service.Impl.AnexoWebServiceImp;
 
@@ -134,14 +133,14 @@ public class AnexoWebServlet extends HttpServlet {
             String subject = "Registro En Bazar Central Del Ejército";
             String content = "Registró en Bazar Central Del Ejército\n"
                     +"------------------------------------------------------------------------------\n"
-                    + "Nro. Administrativo:" + CodAnexo + "\n"
-                    + "Nro DNI:" + Documento + "\n"
-                    + "Pregunta de Seguridad:" + PreguntaSeguridad + "\n"
-                    + "Palabra Clave:" + PalabraClave + "\n"
-                    + "Apellidos y Nombres:" + Apellidos + ", " + Nombres + "\n"
-                    + "Telefono:" + Telefono + "\n"
-                    + "Celular:" + Celular + "\n"
-                    + "RPM/RPC:" + rpm_rpc + "\n"
+                    + "Nro. Administrativo: " + CodAnexo + "\n"
+                    + "Nro DNI: " + Documento + "\n"
+                    + "Pregunta de Seguridad: " + PreguntaSeguridad + "\n"
+                    + "Palabra Clave: " + PalabraClave + "\n"
+                    + "Apellidos y Nombres: " + Apellidos + ", " + Nombres + "\n"
+                    + "Telefono: " + Telefono + "\n"
+                    + "Celular: " + Celular + "\n"
+                    + "RPM/RPC: " + rpm_rpc + "\n"
                     +"------------------------------------------------------------------------------\n"
                     + " Bazar Central del Ejercito  https://www.bcetubazar.com/ ";
 

@@ -1,4 +1,4 @@
-package net.codejava.email;
+package webServelet;
 
 import java.util.Date;
 import java.util.Properties;
