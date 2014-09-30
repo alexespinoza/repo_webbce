@@ -99,7 +99,7 @@ public class AnexoWebDaoImp implements AnexoWebDao {
     @Override
     public int actualizar(AnexoWeb anexo) {
         logger.info("actualizar");
-        sql = "{call sp_actualizar_anexo(?,?,?,?,?)}";
+        sql = "{CALL Sp_AnexoWebActualizar(?,?,?,?,?,?,?,?,?,?,?)}";
         try {
             con = new ConexionSql();
             cn = con.getConexion();
@@ -115,13 +115,9 @@ public class AnexoWebDaoImp implements AnexoWebDao {
             ps.setString(7, anexo.getTelefono());
             ps.setString(8, anexo.getRpm_rpc());
             ps.setString(9, anexo.getCelular());
-            ps.setString(11, anexo.getPalabraClave());
-            ps.setString(12, anexo.getCodigoSeguridad());
-            ps.setString(13, anexo.getIPCliente());
-            ps.setString(14, anexo.getPreguntaSeguridad());
-            ps.setString(15, anexo.getContraseña());
-
-            flgOperacion = ps.executeUpdate();
+            ps.setString(10, anexo.getPalabraClave());
+            ps.setString(11, anexo.getPreguntaSeguridad());
+           flgOperacion = ps.executeUpdate();
             if (flgOperacion > 0) {
                 cn.commit();
             } else {
@@ -182,42 +178,7 @@ anexo.setPreguntaSeguridad(rs.getString("PreguntaSeguridad"));
 
         logger.info("pass");
         sql = "{call Sp_AnexoWebRecuperarContraseña(?,?,?,?,?)} ";
-       /*
-        try {
-            con = new ConexionSql();
-            cn = con.getConexion();
-            cn.setAutoCommit(false);
-            ps = cn.prepareStatement(sql);
-
-            ps.setString(1, anexo.getCodAnexo());
-            ps.setString(2, anexo.getApellidos());
-            ps.setString(3, anexo.getNombres());
-            ps.setString(4, anexo.getDocumento());
-            ps.setString(5, anexo.getDireccion());
-            ps.setString(6, anexo.getEmail());
-            ps.setString(7, anexo.getTelefono());
-            ps.setString(8, anexo.getRpm_rpc());
-            ps.setString(9, anexo.getCelular());
-            ps.setString(11, anexo.getPalabraClave());
-            ps.setString(12, anexo.getCodigoSeguridad());
-            ps.setString(13, anexo.getIPCliente());
-            ps.setString(14, anexo.getPreguntaSeguridad());
-            ps.setString(15, anexo.getContraseña());
-
-            flgOperacion = ps.executeUpdate();
-            if (flgOperacion > 0) {
-                cn.commit();
-            } else {
-                cn.rollback();
-            }
-        } catch (Exception e) {
-            logger.error("actualizar: " + e.getMessage());
-        } finally {
-            con.cerrarConexion(cn);
-        }
-        return flgOperacion;
-        */
-        try {
+             try {
 con = new ConexionSql();
        cn = con.getConexion();
        cn.setAutoCommit(false);

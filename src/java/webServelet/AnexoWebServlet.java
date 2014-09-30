@@ -132,7 +132,7 @@ public class AnexoWebServlet extends HttpServlet {
             pass = context.getInitParameter("pass");
             String subject = "Registro En Bazar Central Del Ejército";
             String content = "Registró en Bazar Central Del Ejército\n"
-                    +"------------------------------------------------------------------------------\n"
+                    + "------------------------------------------------------------------------------\n"
                     + "Nro. Administrativo: " + CodAnexo + "\n"
                     + "Nro DNI: " + Documento + "\n"
                     + "Pregunta de Seguridad: " + PreguntaSeguridad + "\n"
@@ -141,7 +141,7 @@ public class AnexoWebServlet extends HttpServlet {
                     + "Telefono: " + Telefono + "\n"
                     + "Celular: " + Celular + "\n"
                     + "RPM/RPC: " + rpm_rpc + "\n"
-                    +"------------------------------------------------------------------------------\n"
+                    + "------------------------------------------------------------------------------\n"
                     + " Bazar Central del Ejercito  https://www.bcetubazar.com/ ";
 
             if (flgOperacion > 0) {
@@ -163,11 +163,7 @@ public class AnexoWebServlet extends HttpServlet {
             sesion.setAttribute("mensaje", mensaje);
             sesion.setAttribute("sucess", sucess);
             sesion.setAttribute("Admin", Admin);
-            //response.sendRedirect("/webbce/?content=registro-detalle");
-//response.setHeader("Cache-Control", "no-cache");
-//response.setDateHeader("Expires", 0);
-            response.sendRedirect("AnexoWeb?a=listar&TxtAdmin=" + Admin);
-            //listar(request, response);
+            response.sendRedirect("AnexoWeb?a=listar&id=" + Admin + "&opt=lst_deta");
         } catch (Exception e) {
             logger.error("insertar: " + e.getMessage());
         }
@@ -249,8 +245,8 @@ public class AnexoWebServlet extends HttpServlet {
     protected void listar(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         logger.info("listar");
-        String CodAnexo = request.getParameter("TxtAdmin");
-
+        String CodAnexo = request.getParameter("id");
+        String opt = request.getParameter("opt");
         try {
             sesion = request.getSession();
             sesion.removeAttribute("lstaAnexo_deta");
@@ -266,87 +262,71 @@ public class AnexoWebServlet extends HttpServlet {
                 mensaje = "Datos incorrectos";
             }
             sesion.setAttribute("msgListado", mensaje);
-            response.sendRedirect("/webbce/?content=registro-detalle");
+            if ("lst_deta".equals(opt)) {
+                response.sendRedirect("/webbce/?content=registro-detalle");
+            } else {
+                response.sendRedirect("/webbce/?content=modificar-datos-personales");
+            }
         } catch (Exception e) {
             logger.error("listar: " + e.getMessage());
         }
     }
-
-    protected void actualizar(HttpServletRequest request,
+protected void actualizar(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         logger.info("actualizar");
-        String CodAnexo = request.getParameter("CodAnexo") == null ? ""
-                : request.getParameter("CodAnexo");
-
-        String Apellidos = request.getParameter("Apellidos") == null ? ""
-                : request.getParameter("Apellidos");
-
-        String Nombres = request.getParameter("Nombres") == null ? ""
-                : request.getParameter("Nombres");
-
-        String Documento = request.getParameter("Documento") == null ? ""
-                : request.getParameter("Documento");
-
-        String Direccion = request.getParameter("Direccion") == null ? ""
-                : request.getParameter("Direccion");
-
-        String email = request.getParameter("email") == null ? ""
-                : request.getParameter("email");
-
-        String Telefono = request.getParameter("Telefono") == null ? ""
-                : request.getParameter("Telefono");
-
-        String rpm_rpc = request.getParameter("rpm_rpc") == null ? ""
-                : request.getParameter("rpm_rpc");
-
-        String Celular = request.getParameter("Celular") == null ? ""
-                : request.getParameter("Celular");
-
-        String Usuario = request.getParameter("Usuario") == null ? ""
-                : request.getParameter("Usuario");
-
-        String PalabraClave = request.getParameter("PalabraClave") == null ? ""
-                : request.getParameter("PalabraClave");
-
-        String CodigoSeguridad = request.getParameter("CodigoSeguridad") == null ? ""
-                : request.getParameter("CodigoSeguridad");
-
-        String IPCliente = request.getParameter("IPCliente") == null ? ""
-                : request.getParameter("IPCliente");
-
-        String PreguntaSeguridad = request.getParameter("PreguntaSeguridad") == null ? ""
-                : request.getParameter("PreguntaSeguridad");
-
-        String Contraseña = request.getParameter("Contraseña") == null ? ""
-                : request.getParameter("Contraseña");
-        /*
-         try {
-         cliente = new ClienteBean();
-         anexo.setId(id);
-         anexo.setRuc(ruc);
-         anexo.setRazSocial(razSocial);
-         anexo.setDireccion(direccion);
-         anexo.setTelefono(telefono);
-         clienteService = new ClienteServiceImpl();
-         flgOperacion = clienteService.actualizar(cliente);
-         if (flgOperacion == 1) {
-         mensaje = "Cliente actualizado correctamente.";
-         } else if (flgOperacion == 0) {
-         mensaje = "Error al actualizaranexo.";
-         } else {
-         mensaje = "RUC o Razón Social de cliente duplicados.";
-         }
+        String CodAnexo = request.getParameter("TxtCodAnexo");
+        String Apellidos = request.getParameter("TxtApelidos") == null ? ""
+                : request.getParameter("TxtApelidos");
+        String Nombres = request.getParameter("TxtNombres") == null ? ""
+                : request.getParameter("TxtNombres");
+        String Documento = request.getParameter("TxtDni") == null ? ""
+                : request.getParameter("TxtDni");
+        String Direccion = request.getParameter("TxtDireción") == null ? ""
+                : request.getParameter("TxtDireción");
+        String Telefono = request.getParameter("TxtTelefono") == null ? ""
+                : request.getParameter("TxtTelefono");
+        String Celular = request.getParameter("TxtCelular") == null ? ""
+                : request.getParameter("TxtCelular");
+        String rpm_rpc = request.getParameter("TxppmRpc") == null ? ""
+                : request.getParameter("TxppmRpc");
+        String email = request.getParameter("TxtEmail") == null ? ""
+                : request.getParameter("TxtEmail");
+        String PalabraClave = request.getParameter("TxtPalabraclave") == null ? ""
+                : request.getParameter("TxtPalabraclave");
+        String PreguntaSeguridad = request.getParameter("DdlPregunta") == null ? ""
+                : request.getParameter("DdlPregunta");
+        try {
+            anexo = new AnexoWeb();
+            anexo.setCodAnexo(CodAnexo);
+            anexo.setApellidos(Apellidos);
+            anexo.setNombres(Nombres);
+            anexo.setDocumento(Documento);
+            anexo.setDireccion(Direccion);
+            anexo.setEmail(email);
+            anexo.setTelefono(Telefono);
+            anexo.setRpm_rpc(rpm_rpc);
+            anexo.setCelular(Celular);
+            anexo.setPalabraClave(PalabraClave);
+            anexo.setPreguntaSeguridad(PreguntaSeguridad);
+            anexoWebService = new AnexoWebServiceImp();
+            flgOperacion = anexoWebService.actualizar(anexo);
+            if (flgOperacion == 1) {
+                sucess = "1";
+                mensaje = "Datos actualizados correctamente...";
+            } else if (flgOperacion == 0) {
+                mensaje = "Error al actualizar datos...";
+                sucess = "0";
+            }
          sesion = request.getSession();
-         sesion.removeAttribute("msgPostOperacion");
-         sesion.removeAttribute("listaClientes");
-         sesion.removeAttribute("msgListado");
-         sesion.removeAttribute("clienteActualizar");
-         sesion.setAttribute("msgPostOperacion", mensaje);
-         buscar(request, response);
-         } catch (Exception e) {
-         logger.error("actualizar: " + e.getMessage());
-         }
-         */
+            sesion.removeAttribute("msgPostOperacion");
+            sesion.removeAttribute("msgListado");
+              sesion.removeAttribute("sucess");
+            sesion.setAttribute("msgPostOperacion", mensaje );
+            sesion.setAttribute("sucess", sucess);
+            response.sendRedirect("AnexoWeb?a=listar&id=" + CodAnexo); 
+        } catch (Exception e) {
+            logger.error("actualizar: " + e.getMessage());
+        }
     }
 
     protected void eliminar(HttpServletRequest request,

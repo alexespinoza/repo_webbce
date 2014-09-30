@@ -1,9 +1,9 @@
 <%@page import="java.util.List"%>
 <%@page import="Dao.AnexoWeb"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.validate.js"></script>
-	<script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script>
             
 	$().ready(function() {
 		// validate the comment form when it is submitted
@@ -84,68 +84,29 @@
 			topicInputs.attr("disabled", !this.checked);
 		});
 	});
-        
-</script>
+	</script>
  
 <article class="bce-regis">
 
 <%
-String mensaje ="";
-if(session.getAttribute("lstaAnexo") != null){
-List<AnexoWeb> lstClientes = (List<AnexoWeb>)session.
-getAttribute("lstaAnexo");
-AnexoWeb   anexo = lstClientes.get(0) ;
-
-if( "EXISTE".equals(anexo.getCodAnexo())){
-mensaje="El Nro. Administrativo ya esta registrado";
+    if(session.getAttribute("lstaAnexo_deta") != null  || session.getAttribute("CodAnexo") != null )
+    {
+List<AnexoWeb> lstaAnexo_deta = (List<AnexoWeb>)session.
+getAttribute("lstaAnexo_deta");
+AnexoWeb   anexo = lstaAnexo_deta.get(0) ;
 HttpSession sesion = request.getSession();
-sesion.setMaxInactiveInterval(2);
-%>
-<form  name="Vcod" id="Vcod" method="post" action="AnexoWeb?a=buscar" onsubmit="refresh();" >
-<br clear="all">
-<fieldset>
-<legend>Identifiquese </legend>
-<div class="bce-postmetadataheader">
-<h5>Para poder registrarse Ud. debe  ingresar su número administrativo.</h5>
-</div>
-<p><label for="TxtAdmin">Ingrese su Número Administrativo</label>
-<input type="text" name="TxtAdmin"  id="TxtAdmin"  autocomplete="off" title="Ingrese su Nro. Administrativo" MaxLength="9"   onkeypress="numero()" required></p>
-<p><label for="TxtDoc">Ingrese su Número DNI</label>
-<input type="text" name="TxtDoc"  id="TxtDoc" autocomplete="off" title="Ingrese su Nro. DNI" MaxLength="8"   onkeypress="numero()" required></p>
-<br clear="all">
-<p>
-<input type="submit" value="Buscar" class="bce-button"  id="btnBuscar" />
-&nbsp; <a href="salir" class="bce-button">Cancelar</a>
-
-</p>
-<p>
-
-</p>
-</fieldset>
-</form>
-<%
-if(mensaje!=null){%>
-    <p class="bce_error">  <%=mensaje%> </p>
-<%}
-}else{
-HttpSession sesion = request.getSession();
-sesion.setMaxInactiveInterval(300);
+sesion.setMaxInactiveInterval(120);    
 %>
 
-<form class="cmxform" name="bce-form" id="bce-form" action="AnexoWeb?a=insertar" method="post" onsubmit="refresh();" >
+<form class="cmxform" name="bce-form" id="bce-form" action="AnexoWeb?a=actualizar" method="post"  >
 <br clear="all">
 <fieldset>
-<legend>Registro </legend>
-<p>
-<Label for="TxtCodAnexo">Nro. Administrativo</Label>
-<input type="text" name="TxtCodAnexo" ID="TxtCodAnexo"  value="<%=anexo.getCodAnexo()%>" readonly>
-</p>
-
+<legend>Actualizar Datos </legend>
+<p><input type="hidden" name="TxtCodAnexo" ID="TxtCodAnexo"  value="<%=anexo.getCodAnexo()%>"></p>
 <p>
 <Label for="TxtApelidos">Apellidos:</Label>
 <input type="text"  name="TxtApelidos" ID="TxtApelidos"  value="<%=anexo.getApellidos()%>" autocomplete="off" Title="Escribe su apellido paterno y materno" >
 </p>
-
 <p>
 <Label for="TxtNombres"  >Nombres:</Label>
 <input type="text"  name="TxtNombres" ID="TxtNombres"  value="<%=anexo.getNombres()%>" autocomplete="off"  title="Escriba su nombre completo" >
@@ -173,7 +134,7 @@ sesion.setMaxInactiveInterval(300);
 
 <p>
 <Label for="TxppmRpc" >RPM/RPC:</Label>
-<input type="text" name="TxppmRpc" ID="TxppmRpc"  autocomplete="off" MaxLength="24" title="Opcional">
+<input type="text" name="TxppmRpc" ID="TxppmRpc"   value="<%=anexo.getRpm_rpc()%>" autocomplete="off" MaxLength="24" title="Opcional">
 </p>
 
 <p>
@@ -181,18 +142,9 @@ sesion.setMaxInactiveInterval(300);
 <input type="text" name="TxtEmail" ID="TxtEmail" value="<%=anexo.getEmail()%>" autocomplete="off"  title="(Ej: sistemas@bcetubzar.com)" >
 </p>
 <p>
-<Label for="TxtContraseña1">Contraseña</Label>
-<input type="Password" name="TxtContraseña1" ID="TxtContraseña1"   MaxLength="10" title="La Contraseña debe constar 5-12 caracteres, (a-9), (aA-zZ)" >
-</p>
-
-<p>
-<Label for="TxtContraseña2" >Repita la Contraseña</Label>
-<input type="Password" name="TxtContraseña2" ID="TxtContraseña2"   MaxLength="10" title="Repita la Contraseña" >
-</p>
-<p>
 <Label for="DdlPregunta" >Pregunta de seguridad </Label><br>
 <select name="DdlPregunta"  ID="DdlPregunta"  title="Seleccione una pregunta" >
-<OPTION></OPTION>
+<OPTION value="<%=anexo.getPreguntaSeguridad()%>"> <%=anexo.getPreguntaSeguridad()%></OPTION>
 <OPTION value="Lugar de Nacimiento">Lugar de Nacimiento</OPTION>
 <OPTION value="Mejor amigo">Mejor amigo</OPTION>
 <OPTION value="Ocuoación del abuelo">Ocupación del abuelo</OPTION>
@@ -200,50 +152,37 @@ sesion.setMaxInactiveInterval(300);
 </select>
 </p>
 <p>
-<Label for="TxtPalabraclave"  >Ingrese Palabra Clave </Label>
-<input type="text" name="TxtPalabraclave"  ID="TxtPalabraclave"  autocomplete="off"  title="Escriba la palabra clave" >
+<Label for="TxtPalabraclave" >Ingrese Palabra Clave </Label>
+<input type="text" name="TxtPalabraclave"  ID="TxtPalabraclave" value="<%=anexo.getPalabraClave()%>"  autocomplete="off"  title="Escriba la palabra clave" >
 </p>
 <br clear="all">
 <p>
-<input type="submit"  class="bce-button" name="BtnEnviar" ID="BtnEnviar" title="Revise Sus Datos Antes de Regisparse, su datos (usuario,Contraseña) se le enviara a su Correo Regispado" value="Enviar Datos">
-&nbsp; <a href="salir" class="bce-button">Cancelar</a>
+<input type="submit"  class="bce-button" name="BtnEnviar" ID="BtnEnviar" title="Revise Sus Datos Antes de Regisparse, su datos (usuario,Contraseña) se le enviara a su Correo Regispado" value="Actualizar Datos">
+&nbsp;  <input type="button" class="bce-button" value="Cancelar" onclick="cancelar()" >
 </p>
 </fieldset>
 </form>
 <%
-}
+if( session.getAttribute("sucess") == "0" )
+{%>
+<p class="bce_error">    ${msgPostOperacion}   </p>
+<%
+}else if(session.getAttribute("sucess") == "1")
+{%>
+<p class="bce-success">    ${msgPostOperacion}   </p>
+<%}
 }else{
-HttpSession sesion = request.getSession();
-sesion.setMaxInactiveInterval(15);
+  %>
+   <script>window.location="/webbce";</script>
+  <%
+    }
 %>
-<form  name="Vcod" id="Vcod" method="post" action="AnexoWeb?a=buscar">
-<br clear="all">
-<fieldset>
-<legend>Identifiquese </legend>
-<div class="bce-postmetadataheader">
-<h5>Para poder registrarse Ud. debe  ingresar su número administrativo.</h5>
-</div>
-<p>
-<label for="TxtAdmin">Ingrese su Número Administrativo</label>
-<input type="text" name="TxtAdmin"  id="TxtAdmin" autocomplete="off" title="Ingrese su Nro. Administrativo" MaxLength="9"   onkeypress="numero()" required>
-</p>
-<p>
-<label for="TxtDoc">Ingrese su Número DNI</label>
-<input type="text" name="TxtDoc"  id="TxtDoc" autocomplete="off" title="Ingrese su Nro. DNI" MaxLength="8"   onkeypress="numero()" required>
-</p>
-<br clear="all">
-<p><input type="submit" value="Buscar" class="bce-button"  id="btnBuscar" />
-&nbsp; <a href="salir" class="bce-button">Cancelar</a>
-</p><p></p>
-</fieldset>
 
-</form>
-<%if( session.getAttribute("sucess") !=null && session.getAttribute("sucess") !="0" && session.getAttribute("sucess") !="1"){%>
-<p class="bce_error">    ${sucess}   </p>
-<%}}if( session.getAttribute("sucess") == "0" && session.getAttribute("mensaje") !=null){%>
-<p class="bce_error">    ${mensaje}   </p>
-<%}%>
+
+
+
 </article>
 
 </body>
 </html>
+

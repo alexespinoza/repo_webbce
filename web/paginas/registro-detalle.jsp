@@ -14,13 +14,16 @@ sesion.setMaxInactiveInterval(60);
   %>
  <br clear="all">
   <article class="bce-regis" >
-      <div id="muestra">
+      <form name="upddatos" id="upddatos" action="AnexoWeb?a=listar"  method="post" >
+  <div id="muestra">
       <br clear="all"><br clear="all">
        <p></p>
           <H5>DETALLE DE REGISTRO BASAR CENTRAL DEL EJÉRCITO DEL PERÚ</H5>
           <p></p>
            <br clear="all">
     <fieldset>
+        <input type="hidden" name="txtopt" id="txtopt" value="upd" >
+<input type="hidden" name="TxtAdmin" ID="TxtAdmin"  value="<%=anexo.getCodAnexo()%>" >
 <table class="bce-table" >
   <tr>
     <th scope="row">Nro. Administrativo:</th>
@@ -85,22 +88,20 @@ sesion.setMaxInactiveInterval(60);
   <br clear="all">
 <input type="button" class="bce-button" value="Imprimir" onclick="javascript:imprSelec('muestra');function imprSelec(muestra)
 {var ficha=document.getElementById(muestra);var ventimp=window.open(' ','popimpr');ventimp.document.write(ficha.innerHTML);ventimp.document.close();ventimp.print();ventimp.close();};" />
-<input type="button" class="bce-button" value="Modificar" onclick="cancelar()" >
-<input type="button" class="bce-button" value="Terminar" onclick="cancelar()" >
+&nbsp; <a href="salir" class="bce-button">Finalizar</a>
+</form>          
   <br clear="all">
   </article>  
     <script type="text/javascript">
 {
 if(history.forward(1))
-location.replace(history.forward(1))
+window.location="/webbce";
 }
 </script>
 <%
      }
 }else{%>
-
   <script>window.location="/webbce";</script>
-  
- <%
+   <%
  }        
   %>

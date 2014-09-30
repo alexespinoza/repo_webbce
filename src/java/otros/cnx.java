@@ -48,9 +48,8 @@ public class cnx {
          + "\t" + p.getDireccion());
          }
              
-
-       /*
-         
+//'730413700','E.L','ALEX','DNI','DIRECCION','EMAIL','TELEFONO','RPM-RPC','CELULAR','P CLAVE','PREGUNTA S'
+           
          
 //Sp_AnexoWebRecuperarContraseña '730413700','47519658','Lugar de Nacimiento','LIMA','123456'
         String CodAnexo = "730413700";
@@ -59,9 +58,10 @@ public class cnx {
         String PalabraClave = "LIMA";
         String Contraseña = "alexespinoza";
 
-        AnexoWebServiceImp AnexoWeb = new AnexoWebServiceImp();
-       // List<AnexoWeb> list = AnexoWeb.listar(CodAnexo, Documento, PreguntaSeguridad, PalabraClave, Contraseña);
-List<AnexoWeb> list = AnexoWeb.listar(CodAnexo);
+        //AnexoWebServiceImp AnexoWeb = new AnexoWebServiceImp();
+       //List<AnexoWeb> list = AnexoWeb.listar(CodAnexo, Documento, PreguntaSeguridad, PalabraClave, Contraseña);
+
+        /*List<AnexoWeb> list = AnexoWeb.listar(CodAnexo);
         for (AnexoWeb p : list) {
             System.out.println(p.getCodAnexo()
               + "\t" + p.getApellidos()
@@ -74,8 +74,7 @@ List<AnexoWeb> list = AnexoWeb.listar(CodAnexo);
 + "\t" + p.getEmail()
          + "\t" + p.getNombres());
 
-        }
-*/
+        }*/
     }
                
 

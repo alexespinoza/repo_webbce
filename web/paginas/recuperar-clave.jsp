@@ -116,7 +116,7 @@ if( session.getAttribute("sucess") == "1")
 <%   
 }else if (session.getAttribute("sucess") == "0")    {%>
      <!--<script>window.location="/webbce/?p=registro-detalle";</script>-->
-     <p class="bce_error">    ${msgPostOperacion}   </p>
+     <p class="bce_error"> ${msgPostOperacion}   </p>
 
 <%}
 %>
