@@ -21,9 +21,7 @@ ouputStream.write(bytes, 0, bytes.length);
 /*Limpiamos y cerramos flujos de salida*/ 
 ouputStream.flush(); 
 ouputStream.close();
-
-    
-        }else{
+}else{
      	response.sendRedirect("?content=inicio");
  }
         
