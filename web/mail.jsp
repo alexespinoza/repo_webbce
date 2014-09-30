@@ -8,6 +8,6 @@
 </head>
 <body>
     <h2>hola MUNDO</h2>
-    <H2> HOLA MUNDO 2.....!!!</H2>
+    <H2>BYE</H2>
 </body>
 </html>
