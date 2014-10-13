@@ -41,6 +41,7 @@ public class ListarTiendas {
                 tiendas.setImg2(rs.getString("img2"));
                 tiendas.setTelefono(rs.getString("telefono"));
                 tiendas.setCelular(rs.getString("celular"));
+                tiendas.setRpm(rs.getString("rpm"));
                     lista.add(tiendas);
             }
           rs.close();

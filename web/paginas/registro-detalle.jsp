@@ -92,10 +92,10 @@ sesion.setMaxInactiveInterval(60);
 </form>          
   <br clear="all">
   </article>  
-    <script type="text/javascript">
+<script type="text/javascript">
 {
 if(history.forward(1))
-window.location="/webbce";
+location.replace(history.forward(1))
 }
 </script>
 <%

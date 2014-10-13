@@ -14,6 +14,7 @@ public class P_tiendas {
     private String img2;
     private  String telefono;
     private String celular;
+    private String rpm;
 
     public int getIdtiendas() {
         return idtiendas;
@@ -109,6 +110,14 @@ public class P_tiendas {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getRpm() {
+        return rpm;
+    }
+
+    public void setRpm(String rpm) {
+        this.rpm = rpm;
     }
 
     
