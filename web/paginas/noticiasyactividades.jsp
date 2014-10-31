@@ -1,7 +1,6 @@
-<%@page import="Model.dao.ListarImg"%>
+<%@page import="Dao.P_Actividad"%>
 <%@page import="Dao.P_Imagenes"%>
 <%@page import="Model.dao.ListarActividades"%>
-<%@page import="Dao.P_Actividades"%>
 <%@page import="Model.dao.ListarNoticias"%>
 <%@page import="Dao.P_Noticia"%>
 <%@page import="java.util.LinkedList"%>
@@ -19,9 +18,9 @@ for (int i=0;i<listNoticia.size(); i++){
         <%}%>
      <blockquote>Noticias y Novedades</blockquote>    
           <%
-     LinkedList<P_Actividades> listActividad = ListarActividades.getActividades("0");
+     LinkedList<P_Actividad> listActividad = ListarActividades.getActividades("0");
 for (int i=0;i<listActividad.size(); i++){
- P_Actividades actividades = listActividad.get(i);%>
+ P_Actividad actividades = listActividad.get(i);%>
  <h3><a name="actividades<%=actividades.getIdactividades()%>"> <%=actividades.getTitulo()%></a></h3>
 <p><span style="font-weight: bold;"><%=actividades.getNombre()%></span></p>
 <p><%=actividades.getDescripcion()%></p>

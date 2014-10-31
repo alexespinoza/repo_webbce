@@ -1,12 +1,12 @@
 package Dao;
-public class P_actividades {
-    public int idactividades ;
-    public String titulo     ;
-    public String nombre;
-    public  String img;
-    public  String url;
-    public String descripcion;
-    public int idopciones;
+
+public class P_Actividad{
+    private int idactividades;
+    private String titulo;
+    private String nombre;
+    private String img;
+    private String url;
+    private String descripcion;
 
     public int getIdactividades() {
         return idactividades;
@@ -55,13 +55,4 @@ public class P_actividades {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public int getIdopciones() {
-        return idopciones;
-    }
-
-    public void setIdopciones(int idopciones) {
-        this.idopciones = idopciones;
-    }
-    
 }
