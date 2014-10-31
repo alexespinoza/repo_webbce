@@ -17,13 +17,13 @@ Connection cn;
                LinkedList<P_Actividad> lista=new LinkedList<P_Actividad>();
    try {
  String descripcion;
- if(valor=="0"){
+ if(valor=="1"){
      descripcion = "concat(left(descripcion,150), '...') descripcion";
  }else{
      descripcion= "descripcion";
  }
             cn.setAutoCommit(false);
-ps = cn.prepareStatement("SELECT idactividades,titulo,nombre, "+descripcion+" FROM actividades");
+ps = cn.prepareStatement("SELECT idactividades,titulo,nombre, "+descripcion+", url FROM actividades");
                rs = ps.executeQuery();
     while (rs.next()) {
               P_Actividad activiades = new P_Actividad();
@@ -31,6 +31,7 @@ ps = cn.prepareStatement("SELECT idactividades,titulo,nombre, "+descripcion+" FR
                 activiades.setTitulo(rs.getString("titulo"));
                 activiades.setNombre(rs.getString("nombre"));
                 activiades.setDescripcion(rs.getString("descripcion"));
+                 activiades.setUrl(rs.getString("url"));
                 lista.add(activiades);
 }
           rs.close();

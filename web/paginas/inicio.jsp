@@ -47,16 +47,16 @@ for (int a=0;a<lista_p.size(); a++){
  if(a%2==0){%>
         <div class="bce-content-layout-row">
      <div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3><%=PO.getNombre()%></h3>
-<h4><%=PO.getTitulo()%></h4>
+<h3><%=PO.getTitulo()%></h3>
+<h4><%=PO.getNombre()%></h4>
 <p><%=PO.getDescripcion()%></p>
 <p> <b><%=PO.getValido()%> </b></p>
 <p><a href="?promocionesyofertas=promocionesyofertas#promooferta<%=PO.getIdpromo_oferta()%>" class="bce-button">Ver Mas.. .</a></p>
 </div>
 <% }else {%>
      <div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3><%=PO.getNombre()%></h3>
-<h4><%=PO.getTitulo()%></h4>
+<h3><%=PO.getTitulo()%></h3>
+<h4><%=PO.getNombre()%></h4>
 <p><%=PO.getDescripcion()%></p>
 <p> <b><%=PO.getValido()%> </b></p>
 <p><a href="?promocionesyofertas=promocionesyofertas#promooferta<%=PO.getIdpromo_oferta()%>" class="bce-button">Ver Mas.. .</a></p>

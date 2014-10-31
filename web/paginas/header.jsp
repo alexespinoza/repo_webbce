@@ -133,7 +133,7 @@ if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo"
  <form action="LoginServlet" >
  <br clear="all"> 
 <div> <label for="Usuario">Nro. Administrativo</label></div>
-<div clasce- 
+<div class="bce-log" >
 <input type="text" name="codanexo" autocomplete="off" title="Ingrese su Nro. Administrativo" id="codanexo" MaxLength="9" title="Ingrese su Nro. Administrativo" required required onkeypress="numero()">
 </div>
 <div><label for="documento" >DNI</label></div>
