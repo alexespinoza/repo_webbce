@@ -30,7 +30,6 @@ public class ListarTiendas {
               P_tiendas tiendas = new P_tiendas();
                                
                 tiendas.setIdtiendas(rs.getInt("idtiendas"));
-                tiendas.setTitulo(rs.getString("titulo"));
                 tiendas.setNombre(rs.getString("nombre"));
                 tiendas.setDireccion(rs.getString("direccion"));
                 tiendas.setCorreo(rs.getString("correo"));
@@ -40,7 +39,6 @@ public class ListarTiendas {
                 tiendas.setImg1(rs.getString("img1"));
                 tiendas.setImg2(rs.getString("img2"));
                 tiendas.setTelefono(rs.getString("telefono"));
-                tiendas.setCelular(rs.getString("celular"));
                 tiendas.setRpm(rs.getString("rpm"));
                     lista.add(tiendas);
             }

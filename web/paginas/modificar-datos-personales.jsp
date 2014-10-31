@@ -177,10 +177,7 @@ if( session.getAttribute("sucess") == "0" )
   <%
     }
 %>
-
-
-
-
+<br clear="all">
 </article>
 
 </body>

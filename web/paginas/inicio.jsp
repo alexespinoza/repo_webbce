@@ -1,11 +1,11 @@
+<%@page import="java.util.Random"%>
 <%@page import="Model.dao.ListarPromociones"%>
 <%@page import="Dao.P_Promociones"%>
 <%@page import="Model.dao.ListarImg"%>
 <%@page import="Dao.P_Imagenes"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="bce-postmetadataheader"><h2 class="bce-postheader">Nuestras Tiendas</h2>
-</div>
+<div class="bce-postmetadataheader"><h2 class="bce-postheader">Nuestras Tiendas</h2></div>
 <div class="bce-postcontent bce-postcontent-0 clearfix">
 <div class="bce-content-layout">
 <div class="bce-content-layout-row">
@@ -19,9 +19,7 @@
 LinkedList<P_Imagenes> lista = ListarImg.getImg();
 for (int i=0;i<lista.size(); i++){
  P_Imagenes img = lista.get(i);%>
-<!-- <div class="bce-slide-item">
-     --><img src="<%=img.getImg()%>" class="bce-slide-item" title="<%=img.getTitulo()%>">
-     <!--</div>-->
+ <img src="<%=img.getImg()%>" class="bce-slide-item" title="<%=img.getTitulo()%>">
  <%}%>
     </div>
 </div>
@@ -36,12 +34,12 @@ for (int i=0;i<lista_.size(); i++){
 </div>
 </div>
 </div>
-
-<!-- IMAGENES-->
+<!-- FIN IMAGENES-->
 </div>
 </div>
 </div>
  <div class="bce-content-layout-br layout-item-old-0">  </div>
+  <div class="bce-postmetadataheader bce-postheader" >PROMOCIONES Y OFERETAS</div>
 <%
 LinkedList<P_Promociones> lista_p = ListarPromociones.getPromoOferInicio();
 for (int a=0;a<lista_p.size(); a++){
@@ -52,118 +50,21 @@ for (int a=0;a<lista_p.size(); a++){
 <h3><%=PO.getNombre()%></h3>
 <h4><%=PO.getTitulo()%></h4>
 <p><%=PO.getDescripcion()%></p>
-<p><a href="?OFERTAS=OFERTAS<%=PO.getIdpromo_oferta()%>" class="bce-button">Ver Mas.. .</a></p>
+<p> <b><%=PO.getValido()%> </b></p>
+<p><a href="?promocionesyofertas=promocionesyofertas#promooferta<%=PO.getIdpromo_oferta()%>" class="bce-button">Ver Mas.. .</a></p>
 </div>
 <% }else {%>
      <div class="bce-layout-cell layout-item-old-2" style="width: 50%">
 <h3><%=PO.getNombre()%></h3>
 <h4><%=PO.getTitulo()%></h4>
 <p><%=PO.getDescripcion()%></p>
-<p><a href="#" class="bce-button">Ver Mas.. .</a></p>
-
+<p> <b><%=PO.getValido()%> </b></p>
+<p><a href="?promocionesyofertas=promocionesyofertas#promooferta<%=PO.getIdpromo_oferta()%>" class="bce-button">Ver Mas.. .</a></p>
 </div>    
 </div>  
   <%}
 }%>
-         
-<!--
-<div class="bce-content-layout-row">
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Temporada Verano 2014 - bce</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et </p>
-<p><a href="#" class="bce-button">Ver Mas.. .</a></p>
-</div>
-
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Promociones bce</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrxcepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-<p><a href="#" class="bce-button">Ver Mas...</a></p>
-</div>
-
-</div>
-    
-
-    
-<div class="bce-content-layout-row">
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Temporada Verano 2014 -bce </h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p><a href="#" class="bce-button">Ver Mas...</a></p>
-</div>
-
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Promociones</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-<p><a href="#" class="bce-button">Ver Mas...</a></p>
-</div>
-
-</div>
-  
-<div class="bce-content-layout-row">
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Temporada Verano 2014 -bce </h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p><a href="#" class="bce-button">Ver Mas...</a></p>
-</div>
-
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Promociones</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-<p><a href="#" class="bce-button">Ver Mas...</a></p>
-</div>
-
-</div>
-    
-    <div class="bce-content-layout-row">
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Temporada Verano 2014 -bce </h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p><a href="#" class="bce-button">Ver Mas...</a></p>
-</div>
-
-<div class="bce-layout-cell layout-item-old-2" style="width: 50%">
-<h3>Promociones</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-<p><a href="#" class="bce-button">Ver Mas...</a></p>
-</div>
-
-</div>
- -->
-    
+      
 </div>
 
 </div>

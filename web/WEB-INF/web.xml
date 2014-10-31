@@ -6,37 +6,42 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>webServelet.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-    	<!-- SMTP settings -->
+    <!-- SMTP settings -->
     <display-name>EmailSendingWebApp</display-name>
-	<context-param>
-		<param-name>host</param-name>
-		<param-value>smtp.gmail.com</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>port</param-name>
-		<param-value>587</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>user</param-name>
-		<param-value>sistemas.tubazar@gmail.com</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>pass</param-name>
-		<param-value>sistbce123</param-value>
-	</context-param>
- <!--SMT settings-->
-
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>sistemas.tubazar@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>sistbce123</param-value>
+    </context-param>
+    <!--SMT settings-->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
     <!-- Códigos de error -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/paginasError/error404.html</location>
@@ -44,6 +49,5 @@
     <error-page>
         <error-code>500</error-code>
         <location>/WEB-INF/paginasError/error500.html</location>
-    </error-page>  
+    </error-page>
 </web-app>
-

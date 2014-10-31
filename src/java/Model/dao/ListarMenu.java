@@ -73,8 +73,7 @@ public class ListarMenu {
                 menu.setDescripcion(rs.getString("descripcion"));
                 menu.setEsactivo(rs.getString("esactivo"));
                 menu.setOrden(rs.getString("orden"));
-                menu.setIdmenu_submenu(rs.getInt("idmenu_submenu"));
-                    lista_sub.add(menu);
+                   lista_sub.add(menu);
             }
           rs.close();
          ps.close();

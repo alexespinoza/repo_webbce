@@ -17,11 +17,10 @@
 table, ul.bce-hmenu
 {
    font-size: 14px;
-   font-family: Ubuntu, Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
+   font-family: Ubuntu,Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
    font-weight: normal;
    font-style: normal;
 }
-
 h1, h2, h3, h4, h5, h6, p, a, ul, ol, li
 {
    margin: 0;
@@ -1756,8 +1755,8 @@ pre
 
 .bce-postmetadataheader
 {
-   background: #FFD1D6;
-   background: rgba(255, 209, 214, 0.7);
+   background: #E3001C;
+   //background: rgba(255, 209, 214, 0.7);
    margin:0 auto;
    position:relative;
    z-index:1;
@@ -1767,12 +1766,12 @@ pre
 
 .bce-postheader
 {
-   color: #E3001C;
+   color: white;
    margin: 6px 0;
    font-size: 23px;
    font-family: Ubuntu, Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
-   font-weight: normal;
-   font-style: normal;
+   font-weight: bold;
+  text-align: center;
 }
 
 .bce-postheader a, 

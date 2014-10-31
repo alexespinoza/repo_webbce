@@ -105,9 +105,7 @@ sesion.setMaxInactiveInterval(2);
 <br clear="all">
 <fieldset>
 <legend>Identifiquese </legend>
-<div class="bce-postmetadataheader">
-<h5>Para poder registrarse Ud. debe  ingresar su número administrativo.</h5>
-</div>
+<h4>Para poder registrarse Ud. debe  ingresar su número administrativo.</h4>
 <p><label for="TxtAdmin">Ingrese su Número Administrativo</label>
 <input type="text" name="TxtAdmin"  id="TxtAdmin"  autocomplete="off" title="Ingrese su Nro. Administrativo" MaxLength="9"   onkeypress="numero()" required></p>
 <p><label for="TxtDoc">Ingrese su Número DNI</label>
@@ -220,9 +218,7 @@ sesion.setMaxInactiveInterval(15);
 <br clear="all">
 <fieldset>
 <legend>Identifiquese </legend>
-<div class="bce-postmetadataheader">
-<h5>Para poder registrarse Ud. debe  ingresar su número administrativo.</h5>
-</div>
+<h4>Para poder registrarse Ud. debe  ingresar su número administrativo.</h4>
 <p>
 <label for="TxtAdmin">Ingrese su Número Administrativo</label>
 <input type="text" name="TxtAdmin"  id="TxtAdmin" autocomplete="off" title="Ingrese su Nro. Administrativo" MaxLength="9"   onkeypress="numero()" required>

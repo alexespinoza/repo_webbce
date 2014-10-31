@@ -1,22 +1,19 @@
 package Dao;
+public class P_Actividades {
+    public int idactividades ;
+    public String titulo     ;
+    public String nombre;
+    public  String img;
+    public  String url;
+    public String descripcion;
+    public int idopciones;
 
-public class P_Promociones {
-
-    private int idpromo_oferta;
-    private String titulo;
-    private String nombre;
-    private String valido;
-    private String img;
-    private String url;
-    private String descripcion;
-    private int orden;
-
-    public int getIdpromo_oferta() {
-        return idpromo_oferta;
+    public int getIdactividades() {
+        return idactividades;
     }
 
-    public void setIdpromo_oferta(int idpromo_oferta) {
-        this.idpromo_oferta = idpromo_oferta;
+    public void setIdactividades(int idactividades) {
+        this.idactividades = idactividades;
     }
 
     public String getTitulo() {
@@ -33,14 +30,6 @@ public class P_Promociones {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getValido() {
-        return valido;
-    }
-
-    public void setValido(String valido) {
-        this.valido = valido;
     }
 
     public String getImg() {
@@ -67,14 +56,12 @@ public class P_Promociones {
         this.descripcion = descripcion;
     }
 
-    public int getOrden() {
-        return orden;
+    public int getIdopciones() {
+        return idopciones;
     }
 
-    public void setOrden(int orden) {
-        this.orden = orden;
+    public void setIdopciones(int idopciones) {
+        this.idopciones = idopciones;
     }
-
     
-
 }

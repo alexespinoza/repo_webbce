@@ -1,5 +1,7 @@
 package Dao;
 
+import javax.print.DocFlavor;
+
 public class P_Menu {
 
     private Integer idmenu;
@@ -8,17 +10,17 @@ public class P_Menu {
     private String descripcion;
     private String esactivo;
     private String orden;
-    private Integer idmenu_submenu;
+    private  int idmenu_submenu;
 
-    public Integer getIdmenu_submenu() {
+    public int getIdmenu_submenu() {
         return idmenu_submenu;
     }
 
-    public void setIdmenu_submenu(Integer idmenu_submenu) {
+    public void setIdmenu_submenu(int idmenu_submenu) {
         this.idmenu_submenu = idmenu_submenu;
     }
-
-    public Integer getIdmenu() {
+    
+            public Integer getIdmenu() {
         return idmenu;
     }
 

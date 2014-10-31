@@ -1,3 +1,5 @@
+<%@page import="Model.dao.ListarNoticias"%>
+<%@page import="Dao.P_Noticia"%>
 <%@page import="Model.dao.ListarMenu"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="Dao.P_Menu"%>
@@ -5,25 +7,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="es">
 <head>
- <meta charset="utf-8"/>
+<meta charset="utf-8"/>
 <meta http-equiv="Expires" content="0" />
 <meta http-equiv="Pragma" content="no-cache" />
 <title> Bazar Central del Ejercito del Perú</title>
 <link rel="shortcut icon" href="images/BCEIco.ico"/>
 <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width"/>
-
-    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <link rel="stylesheet" href="css/style.css" media="screen"/>
-    <!--[if lte IE 7]><link rel="stylesheet" href="style.ie7.css" media="screen" /><![endif]-->
-    <link rel="stylesheet" href="css/style.responsive.css" media="all"/>
-
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<link rel="stylesheet" href="css/style.css" media="screen"/>
+<!--[if lte IE 7]><link rel="stylesheet" href="style.ie7.css" media="screen" /><![endif]-->
+<link rel="stylesheet" href="css/style.responsive.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu&amp;subset=latin"/>
 <link rel="stylesheet" type="text/css" href="css/bce_style.css"/>
 <script src="js/jquery.js"></script>
  <script src="js/script.js"></script>
 <script src="js/script.responsive.js"></script>
 <script src="js/validar.js"></script>
-<meta name="description" content="Bazar Central del Ejercito del PERÚ"/>
 <script>
     jQuery(function($) {
     'use strict';
@@ -46,12 +45,11 @@
     }
 });
 </script>
-
+<meta name="description" content="Bazar Central del Ejercito del PERÚ"/>
 </head>
 <body>
 <div id="bce-main">
 <header class="bce-header clearfix">
-
 <div class="bce-shapes">
 <h3 class="bce-headline" data-left="31.59%">
  Bazar Central del Ejército
@@ -104,22 +102,12 @@ for (int i=0;i<lista.size(); i++){
                     <div class="bce-content-layout-row">
                         <div class="bce-layout-cell bce-sidebar1 clearfix">
 
-<!--
-<div class="bce-block clearfix">
-        <div class="bce-blockcontent">
--->
 <%
-String nombres ;
-String codanexo;
-String aut;
-String sucess="";
-String ecc ="";
-String ms ="";
+String nombres ;String codanexo;String aut;String sucess="";String ms ="";
 if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo") != null){
- 
  nombres = (session.getAttribute("NomAnexo")).toString() ;
-  codanexo = (session.getAttribute("CodAnexo")).toString() ;
-   ms=request.getParameter("ms");%>
+ codanexo = (session.getAttribute("CodAnexo")).toString() ;
+ ms=request.getParameter("ms");%>
  <div class="bce-block clearfix">
         <div class="bce-blockcontent">
    <div class="bce-square">
@@ -145,7 +133,7 @@ if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo"
  <form action="LoginServlet" >
  <br clear="all"> 
 <div> <label for="Usuario">Nro. Administrativo</label></div>
-<div class="bce-log"> 
+<div clasce- 
 <input type="text" name="codanexo" autocomplete="off" title="Ingrese su Nro. Administrativo" id="codanexo" MaxLength="9" title="Ingrese su Nro. Administrativo" required required onkeypress="numero()">
 </div>
 <div><label for="documento" >DNI</label></div>
@@ -161,55 +149,44 @@ if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo"
            <p class="bce_error">${ms}</p>  
         <% }%>
          
-     
-  
 </div>
-
- </form>
+</form>
  <br clear="all">
   </div>
  <br clear="all">
     <div class="bce-square">
     <blockquote>Registrese</blockquote>
     <br clear="all">
-    <a href="?content=registro"><img src="images/registrarse.jpg" width="100%"></a>
+    <a href="?content=registro">Registrese</a>
     <br clear="all"><br clear="all">
   </div>
-     
-     
-    <%
+     <%
  nombres = "";
  codanexo="";
 aut ="";
-
     %>
     </div>
     </div>
-    <%
-}
-
-    
-%>
-    
+    <%}%>
 <!--<p> <%=ms%>  </p>-->
+<!---->
+ <div class="bce-block clearfix">
+        <div class="bce-blockcontent">
+   <div class="bce-square">
+    <blockquote>Noticias y Actividades</blockquote>
+    <%
+     LinkedList<P_Noticia> listNoticia = ListarNoticias.getNoticia("1");
+for (int i=0;i<listNoticia.size(); i++){
+ P_Noticia noticia = listNoticia.get(i);%>
+<h3><%=noticia.getTitulo()%></h3>
+<p><span style="font-weight: bold;"><%=noticia.getNombre()%></span></p>
+<p><%=noticia.getDescripcion()%></p>
+<p><a href="?noticiasyactividades=noticiasyactividades#conten<%=noticia.getIdnoticias()%>" class="bce-button">Ver Mas..</a></p>
+    <br clear="all"> 
+        <%}%>
+  </div></div></div>
+ </div>
 
-<!---->
-<br clear="all">
-<h3>Aperturas de Nuevas Tiendas</h3>
-<p><span style="font-weight: bold;">Apertura de mas tiendas en Arequipa.</span></p>
-<p>Apertura de mas tiendas en Arequipa,s tiendas en Arequipa</p>
-<p><a href="#" class="bce-button">Ver Mas..</a></p>
-<!---->
-<!---->
-<br clear="all">
-<h3>Aperturas de Nuevas Tiendas</h3>
-<p><span style="font-weight: bold;">Apertura de mas tiendas en Arequipa.</span></p>
-<p>Apertura de mas tiendas en Arequipa,de mas tiendas en Arequipa</p>
-<p><a href="#" class="bce-button">Ver Mas..</a></p>
-<!---->
-
-<br clear="all">
-                        </div>
-
+<!--content-->
 <div class="bce-layout-cell bce-content clearfix">
 <article class="bce-post bce-article">

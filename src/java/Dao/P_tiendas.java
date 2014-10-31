@@ -3,7 +3,6 @@ package Dao;
 public class P_tiendas {
 
     private int idtiendas;
-    private String titulo;
     private String nombre;
     private String direccion;
     private String correo;
@@ -23,16 +22,7 @@ public class P_tiendas {
     public void setIdtiendas(int idtiendas) {
         this.idtiendas = idtiendas;
     }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getNombre() {
+   public String getNombre() {
         return nombre;
     }
 
