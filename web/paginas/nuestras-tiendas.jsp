@@ -31,7 +31,8 @@ img="http://ingeniatest.com/portalInmobiliario-theme/images/ibk/Imagen_no_dispon
 <strong>DIRECCIÓN</strong> <%=tiendas.getDireccion()%> <br clear='all'>
 <strong>CORREO</strong> <%=tiendas.getCorreo()%><br clear='all'>
 <% if(session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo") != null){%>
-<strong>TELEFONO:</strong> <%=tiendas.getTelefono()%><br clear='all'><strong>RPM:</strong> <%=tiendas.getRpm()%> <br clear='all'><a href="<%=tiendas.getMapa()%>" target="_blank">Ver mapa</a><br clear='all'><br clear='all'>
+<strong>TELEFONO:</strong> <%=tiendas.getTelefono()%><br clear='all'><strong>RPM:</strong> <%=tiendas.getRpm()%> <br clear='all'>
+<a href="<%=tiendas.getMapa()%>" target="_blank">Ver mapa</a><br clear='all'><br clear='all'>
 <%}else{%>
 <br><p style="color:#F8E0E0;font-style: italic">Para ver todo inicie sesion por favor...</p><%}%><td ></td></tr>
 <%}%>                          

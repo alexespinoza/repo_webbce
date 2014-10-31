@@ -23,7 +23,7 @@ Connection cn;
      descripcion= "descripcion";
  }
             cn.setAutoCommit(false);
-ps = cn.prepareStatement("SELECT idactividades,titulo,nombre, "+descripcion+", url FROM actividades");
+ps = cn.prepareStatement("SELECT idactividades,titulo,nombre, "+descripcion+", url FROM actividades ORDER BY idactividades DESC");
                rs = ps.executeQuery();
     while (rs.next()) {
               P_Actividad activiades = new P_Actividad();

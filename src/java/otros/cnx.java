@@ -1,6 +1,8 @@
 package otros;
 
 import Conexion.ConexionMysql;
+import Conexion.ConexionSql;
+import Conexion.ConnectionSqlsvr;
 import Dao.AnexoWeb;
 import Dao.P_tiendas;
 import Model.dao.ListarTiendas;
@@ -10,7 +12,7 @@ import service.Impl.AnexoWebServiceImp;
 public class cnx {
 
     public static void main(String[] args) {
-        /*
+        
          if (new ConexionSql().getConexion()!=null) {
          System.out.println(":)------->");
          }
@@ -27,9 +29,8 @@ public class cnx {
          System.out.println(":(");
              
          }
-*/
 
-    
+/*
          if (new ConexionMysql().getconexion()!=null) {
          System.out.println(":)------->");
          }
@@ -48,16 +49,16 @@ public class cnx {
          + "\t" + p.getDireccion());
          }
              
-//'730413700','E.L','ALEX','DNI','DIRECCION','EMAIL','TELEFONO','RPM-RPC','CELULAR','P CLAVE','PREGUNTA S'
+730413700','E.L','ALEX','DNI','DIRECCION','EMAIL','TELEFONO','RPM-RPC','CELULAR','P CLAVE','PREGUNTA S'
            
          
-//Sp_AnexoWebRecuperarContraseña '730413700','47519658','Lugar de Nacimiento','LIMA','123456'
+Sp_AnexoWebRecuperarContraseña '730413700','47519658','Lugar de Nacimiento','LIMA','123456'
         String CodAnexo = "730413700";
         String Documento = "47519658";
         String PreguntaSeguridad = "Lugar de Nacimiento";
         String PalabraClave = "LIMA";
         String Contraseña = "alexespinoza";
-
+*/
         //AnexoWebServiceImp AnexoWeb = new AnexoWebServiceImp();
        //List<AnexoWeb> list = AnexoWeb.listar(CodAnexo, Documento, PreguntaSeguridad, PalabraClave, Contraseña);
 

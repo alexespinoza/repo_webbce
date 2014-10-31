@@ -23,7 +23,7 @@ Connection cn;
      descripcion= "descripcion";
  }
             cn.setAutoCommit(false);
-ps = cn.prepareStatement("SELECT idnoticias,titulo,nombre, "+descripcion+" FROM noticias");
+ps = cn.prepareStatement("SELECT idnoticias,titulo,nombre, "+descripcion+" FROM noticias ORDER BY idnoticias DESC");
                rs = ps.executeQuery();
     while (rs.next()) {
               P_Noticia noticia = new P_Noticia();

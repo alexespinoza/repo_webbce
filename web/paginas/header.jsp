@@ -58,18 +58,12 @@
 <div class="bce-object1997802817" data-left="0%"></div>
 </div>
 <div class="bce-user" data-left="100%">
-    <%
-        String user ="";
+    <%String user ="";
         String logeo ="" ;
         if(session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo") != null){
             user=(session.getAttribute("NomAnexo")).toString();
     logeo=("Bienvenido:  <br>" + user + " <a href='paginas/Logout.jsp' >Salir</a>");
-    
-        }else{%>
-        <a href="https://www.facebook.com/pages/Bazar-Central-del-Ej%C3%A9rcito-Oficial/1437488386503042" target="_blank">
-            <img src="http://www.cultivohidroponico.com/imagenes_hidroponia/btn_facebook.png"></a>
-       <% }
-        %>
+    }%>
     <h4 ><%=logeo%></h4> 
 </div>
 </header>
@@ -101,7 +95,6 @@ for (int i=0;i<lista.size(); i++){
                 <div class="bce-content-layout">
                     <div class="bce-content-layout-row">
                         <div class="bce-layout-cell bce-sidebar1 clearfix">
-
 <%
 String nombres ;String codanexo;String aut;String sucess="";String ms ="";
 if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo") != null){
@@ -143,22 +136,13 @@ if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo"
      <div class="bce-log"> <input type="password" name="password"  id="password" title="Ingrese su contraseña"></div>
 <div class="Acceder"> <br clear="all">
  <a href="?content=recuperar-clave">Olvido su clave</a><br clear="all"><br clear="all">
+ <a href="?content=registro">Registrese</a> <br clear="all"> <br clear="all">     
 <input type="submit" class="bce-button bce-button" value="Acceder" name="submit">
- <br clear="all"><br clear="all"> 
-         <% if(session.getAttribute("ms")!=null){%>
-           <p class="bce_error">${ms}</p>  
-        <% }%>
-         
+ <br clear="all">  <% if(session.getAttribute("ms")!=null){%>
+<p class="bce_error">${ms}</p> <% }%>
 </div>
 </form>
  <br clear="all">
-  </div>
- <br clear="all">
-    <div class="bce-square">
-    <blockquote>Registrese</blockquote>
-    <br clear="all">
-    <a href="?content=registro">Registrese</a>
-    <br clear="all"><br clear="all">
   </div>
      <%
  nombres = "";
@@ -184,8 +168,14 @@ for (int i=0;i<listNoticia.size(); i++){
 <p><a href="?noticiasyactividades=noticiasyactividades#conten<%=noticia.getIdnoticias()%>" class="bce-button">Ver Mas..</a></p>
     <br clear="all"> 
         <%}%>
-  </div></div></div>
- </div>
+  </div>
+   <br clear="all">
+ <div class="bce-square">
+    <blockquote>Síguenos en:</blockquote>
+    <iframe src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com/pages/Bazar-Central-del-Ej%C3%A9rcito-Oficial/1437488386503042?ref=hl&amp;width&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:120px; width:180px; " allowTransparency="true"></iframe>
+    <br clear="all"> 
+    </div></div></div>
+  </div>
 
 <!--content-->
 <div class="bce-layout-cell bce-content clearfix">
