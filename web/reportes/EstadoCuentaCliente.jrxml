@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstadoCuentaCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.2100000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="28"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#F0F0F0"/>
@@ -1127,113 +1127,113 @@ WHERE     (vAnexo_CodyNom.IdAnexo = @IdAnexo) AND (dbo.CreditoPeriodo.IdCreditoP
 				<reportElement x="18" y="319" width="509" height="28"/>
 			</rectangle>
 			<textField>
-				<reportElement x="18" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="20" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo0}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="81" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="83" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="146" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="148" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="212" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="214" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="276" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="278" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="338" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="340" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo4}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="403" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="464" y="320" width="63" height="12"/>
-				<textElement>
+				<reportElement x="466" y="320" width="60" height="12"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo6}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="18" y="331" width="63" height="12"/>
-				<textElement>
+				<reportElement x="18" y="333" width="63" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_0}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="81" y="335" width="63" height="12"/>
-				<textElement>
+				<reportElement x="81" y="333" width="63" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="145" y="333" width="63" height="12"/>
-				<textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_1}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="211" y="333" width="63" height="12"/>
-				<textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_2}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="275" y="333" width="63" height="12"/>
-				<textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_3}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="338" y="333" width="63" height="12"/>
-				<textElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_4}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="402" y="331" width="63" height="12"/>
-				<textElement>
+				<reportElement x="402" y="333" width="63" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="465" y="332" width="63" height="12"/>
-				<textElement>
+				<reportElement x="465" y="333" width="63" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_6}]]></textFieldExpression>

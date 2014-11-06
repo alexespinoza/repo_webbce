@@ -2,7 +2,6 @@ package otros;
 
 import Conexion.ConexionMysql;
 import Conexion.ConexionSql;
-import Conexion.ConnectionSqlsvr;
 import Dao.AnexoWeb;
 import Dao.P_tiendas;
 import Model.dao.ListarTiendas;
@@ -22,13 +21,7 @@ public class cnx {
          }
 
 
-         if (new ConnectionSqlsvr().getConnection()!=null) {
-         System.out.println(":)------->");
-         }
-         else{
-         System.out.println(":(");
-             
-         }
+     
 
 /*
          if (new ConexionMysql().getconexion()!=null) {

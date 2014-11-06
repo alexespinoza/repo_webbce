@@ -26,7 +26,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			user.setCodAnexo(request.getParameter("codanexo"));
                         user.setDni(request.getParameter("documento"));
 			user.setPassword(request.getParameter("password"));
-                    			user = LoginDAO.login(user);
+                    			user = LoginDAO.logeo(user);
 			if(user.isValid())
 			{
 			HttpSession session = request.getSession(true);

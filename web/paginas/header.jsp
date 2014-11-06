@@ -58,20 +58,13 @@
 <div class="bce-object1997802817" data-left="0%"></div>
 </div>
 <div class="bce-user" data-left="100%">
-    <%String user ="";
-        String logeo ="" ;
-        if(session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo") != null){
-            user=(session.getAttribute("NomAnexo")).toString();
-    logeo=("Bienvenido:  <br>" + user + " <a href='paginas/Logout.jsp' >Salir</a>");
-    }%>
-    <h4 ><%=logeo%></h4> 
+<!-- header --> 
 </div>
 </header>
 <div class="bce-sheet clearfix">
 <nav class="bce-nav clearfix">
 <ul class="bce-hmenu">
-<%
-    LinkedList<P_Menu> lista = ListarMenu.getMenu();
+<%LinkedList<P_Menu> lista = ListarMenu.getMenu();
 for (int i=0;i<lista.size(); i++){
  P_Menu menu = lista.get(i);%>
    <li><a href="?content=<%=menu.getUrl()%>"><%=menu.getTitulo()%></a>
@@ -83,12 +76,7 @@ for (int i=0;i<lista.size(); i++){
  P_Menu menu_sub = lista_sub.get(x);
  %> 
   <li><a href="?content=<%=menu_sub.getUrl()%>"><%=menu_sub.getTitulo()%></a></li>
-  <%}
-  out.println(" </ul> ");
-  }
- out.println(" </li> ");
-}
- %>
+  <%} out.println(" </ul> ");} out.println(" </li> ");} %>
 </ul> 
     </nav>
 <div class="bce-layout-wrapper clearfix">
@@ -106,8 +94,8 @@ if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo"
    <div class="bce-square">
     <blockquote>Bienvenido:</blockquote>
     <br clear="all">
-      <p> <%=nombres %> </p><br clear="all">
-    <a href="Logout.jsp">Salir</a>
+      <p> <%=nombres%> </p><br clear="all">
+    <a href="salir">Salir</a>
     <br clear="all"><br clear="all">
   </div>
     <br clear="all">
@@ -116,9 +104,7 @@ if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo"
         <jsp:include page="option_user.jsp" flush="true" />
    </div>
 </div></div>
-    <%
-}else{
-    %>
+    <%}else{%>
     <div class="bce-block clearfix">
         <div class="bce-blockcontent">
     <div class="bce-square">
@@ -144,16 +130,11 @@ if( session.getAttribute("NomAnexo") !=  null && session.getAttribute("CodAnexo"
 </form>
  <br clear="all">
   </div>
-     <%
- nombres = "";
- codanexo="";
-aut ="";
-    %>
+     <%nombres = ""; codanexo="";aut ="";   %>
     </div>
     </div>
     <%}%>
 <!--<p> <%=ms%>  </p>-->
-<!---->
  <div class="bce-block clearfix">
         <div class="bce-blockcontent">
    <div class="bce-square">
@@ -176,7 +157,6 @@ for (int i=0;i<listNoticia.size(); i++){
     <br clear="all"> 
     </div></div></div>
   </div>
-
 <!--content-->
 <div class="bce-layout-cell bce-content clearfix">
 <article class="bce-post bce-article">

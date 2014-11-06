@@ -87,7 +87,6 @@
 	</script>
  
 <article class="bce-regis">
-
 <%
     if(session.getAttribute("lstaAnexo_deta") != null  || session.getAttribute("CodAnexo") != null )
     {
@@ -111,32 +110,26 @@ sesion.setMaxInactiveInterval(120);
 <Label for="TxtNombres"  >Nombres:</Label>
 <input type="text"  name="TxtNombres" ID="TxtNombres"  value="<%=anexo.getNombres()%>" autocomplete="off"  title="Escriba su nombre completo" >
 </p>
-
 <p>
 <Label for="TxtDni" >DNI:</Label>
 <input type="text" name="TxtDni" ID="TxtDni" value="<%=anexo.getDocumento()%>" autocomplete="off" MaxLength="8" onkeypress="ValidaSoloNumeros()" Title="Escriba su DNI  (8 digitos)" >
 </p>
-
 <p>
 <Label for="TxtDireción">Direccion:</Label>
 <input type="text" name="TxtDireción" ID="TxtDireción" value="<%=anexo.getDireccion()%>" autocomplete="off" title="Escriba su dirección(Ej: Av Boulevard S/N -San Borja)" >
 </p>
-
 <p>
 <Label ID="TxtTelefono">Fijo:</Label>
 <input type="text" name="TxtTelefono" ID="TxtTelefono" value="<%=anexo.getTelefono()%>"  autocomplete="off" MaxLength="12"  title="(Ej: 01 3171700)" >
 </p>
-
 <p>
 <Label for="TxtCelular">Movil:</Label>
 <input type="text" name="TxtCelular"  ID="TxtCelular"  value="<%=anexo.getCelular()%>" autocomplete="off" MaxLength="9" title="Escriba su N°  Cel. (9 digitos)" >
 </p>
-
 <p>
 <Label for="TxppmRpc" >RPM/RPC:</Label>
 <input type="text" name="TxppmRpc" ID="TxppmRpc"   value="<%=anexo.getRpm_rpc()%>" autocomplete="off" MaxLength="24" title="Opcional">
 </p>
-
 <p>
 <Label for="TxtEmail" > E-Mail:</Label>
 <input type="text" name="TxtEmail" ID="TxtEmail" value="<%=anexo.getEmail()%>" autocomplete="off"  title="(Ej: sistemas@bcetubzar.com)" >
@@ -171,7 +164,7 @@ if( session.getAttribute("sucess") == "0" )
 {%>
 <p class="bce-success">    ${msgPostOperacion}   </p>
 <%}
-}else{
+}else if(session.getAttribute("CodAnexo")== null || session.getAttribute("sucess")== null){
   %>
    <script>window.location="/webbce";</script>
   <%

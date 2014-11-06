@@ -1,53 +1,45 @@
 package Model.dao;
 
-import Conexion.ConnectionSqlsvr;
+import Conexion.ConexionSql;
 import Dao.LoginBean;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import org.apache.log4j.Logger;
 
-public class LoginDAO
-{
-static Connection currentCon = null;
-static ResultSet rs = null;
-public static LoginBean login(LoginBean bean)
-{
-Statement stmt = null;
-String codanexo = bean.getCodAnexo();
-String password = bean.getPassword();
-String dni = bean.getDni();
+public class LoginDAO {
 
-String searchQuery = "SELECT AW.CodAnexo, AW.CodAnexo Usuario, AW.Apellidos +' ' + AW.Nombres as NomAnexo From AnexoWeb AW INNER JOIN Anexo A " +
-" ON AW.CodAnexo = A.CodAnexo WHERE AW.CodAnexo='" + codanexo + "' AND PwdCompare('" +password +"',Contraseña)=1 AND A.Documento='"+dni+"'";
-try
-{
-currentCon = ConnectionSqlsvr.getConnection();
-stmt=currentCon.createStatement();
-rs = stmt.executeQuery(searchQuery);
-boolean userExists = rs.next();
+    private static Logger logger = Logger.getLogger(LoginDAO.class.getName());
+    static ResultSet rs = null;
+    static ConexionSql con;
+    static Connection cn;
 
-if (!userExists)
-{
-bean.setValid(false);
-bean.setMs("Datos Incorrectos...");
-}
-else if (userExists)
-{
-String CodAnexo = rs.getString("CodAnexo");
-String NomAnexo = rs.getString("NomAnexo");
+    public static LoginBean logeo(LoginBean user) throws Exception {
+        PreparedStatement stmt = null;
+        String sql = "{CALL Sp_AnexoWebLogeo(?,?,?)}";
+        try {
+            con = new ConexionSql();
+            cn = con.getConexion();
+            stmt = cn.prepareStatement(sql);
+            stmt.setString(1, user.getCodAnexo());
+            stmt.setString(2, user.getDni());
+            stmt.setString(3, user.getPassword());
+            rs = stmt.executeQuery();
+            boolean userExists = rs.next();
+            if (!userExists) {
+                user.setValid(false);
+                user.setMs("Datos Incorrectos...");
+            } else if (userExists) {
+                user.setCodAnexo(rs.getString("CodAnexo"));
+                user.setNomAnexo(rs.getString("NomAnexo"));
+                user.setValid(true);
+                user.setMs("Bievenido " + rs.getString("NomAnexo"));
+            }
+        } catch (Exception e) {
 
-
-bean.setCodAnexo(CodAnexo);
-bean.setNomAnexo(NomAnexo);
-bean.setValid(true);
-bean.setMs("Bievenido " +  NomAnexo);
-}
-
-}
-catch (Exception ex)
-{
-bean.setMs("Nose puede Iniciar Session! " + ex);
-}
-return bean;
-}
+        } finally {
+            con.cerrarConexion(cn);
+        }
+        return user;
+    }
 }

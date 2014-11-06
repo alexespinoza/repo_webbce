@@ -3,15 +3,16 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
-<title>Logged Out</title> </head>
+<title>Salir---> BCE</title> </head>
 <body>
 
 <br/>
 <% 
    
 request.getSession().removeAttribute("NomAnexo");
- session.invalidate();
-  response.sendRedirect("/webbce");
+request.getSession().removeAttribute("CodAnexo");
+session.invalidate();
+ response.sendRedirect("/webbce");
 %>
 
 <br/>
