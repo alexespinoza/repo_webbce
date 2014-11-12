@@ -10,20 +10,19 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 
 public class ListarMenu {
-    public static LinkedList<P_Menu> getMenu()
+    private static Connection cn;
+     private static PreparedStatement ps;
+     private static ResultSet rs;
+    public static LinkedList<P_Menu> getMenu() throws Exception
     {
-
     
-     Connection cn;
-      PreparedStatement ps;
-     ResultSet rs;
-        ConexionMysql conexion=new ConexionMysql();
-            cn =   conexion.getconexion();
-               LinkedList<P_Menu> lista=new LinkedList<P_Menu>();
-   try {
- 
-            cn.setAutoCommit(false);
-
+       LinkedList<P_Menu> lista=new LinkedList<P_Menu>();
+       ConexionMysql con=new ConexionMysql();
+     try {
+   
+        con.Conectar();
+            cn =   con.getCn();
+             cn.setAutoCommit(false);
             ps = cn.prepareStatement("{call Sp_Menu()}");
                rs = ps.executeQuery();
     while (rs.next()) {
@@ -40,25 +39,22 @@ public class ListarMenu {
             }
           rs.close();
          ps.close();
-         cn.close();
-        } catch (Exception e) {
+            } catch (Exception e) {
             e.printStackTrace();
-        } 
+        } finally{
+       con.Cerrar();
+   }
         return lista;
     }
     
     
-    public static LinkedList<P_Menu> getMenu_submenu( int idmenu )
+    public static LinkedList<P_Menu> getMenu_submenu( int idmenu ) throws Exception
     {
-   
-     Connection cn;
-      PreparedStatement ps;
-     ResultSet rs;
-        ConexionMysql conexion=new ConexionMysql();
-            cn =   conexion.getconexion();
-               LinkedList<P_Menu> lista_sub=new LinkedList<P_Menu>();
+           ConexionMysql con=new ConexionMysql();
+                       LinkedList<P_Menu> lista_sub=new LinkedList<P_Menu>();
    try {
- 
+ con.Conectar();
+            cn =   con.getCn();
             cn.setAutoCommit(false);
 
             ps = cn.prepareStatement("{call Sp_SubMenu(?)}");
@@ -66,7 +62,7 @@ public class ListarMenu {
                          rs = ps.executeQuery();
     while (rs.next()) {
               P_Menu menu = new P_Menu();
-                               
+                            
                 menu.setIdmenu(rs.getInt("idmenu"));
                 menu.setTitulo(rs.getString("titulo"));
                 menu.setUrl(rs.getString("url"));
@@ -77,10 +73,11 @@ public class ListarMenu {
             }
           rs.close();
          ps.close();
-         cn.close();
-        } catch (Exception e) {
+             } catch (Exception e) {
             e.printStackTrace();
-        } 
+        } finally{
+       con.Cerrar();
+   }
         return lista_sub;
     }
     

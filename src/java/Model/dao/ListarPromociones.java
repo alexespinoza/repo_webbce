@@ -8,15 +8,16 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 
 public class ListarPromociones {
-
-    public static LinkedList<P_Promociones> getPromoOfer() {
-        Connection cn;
-        PreparedStatement ps;
-        ResultSet rs;
-        ConexionMysql conexion = new ConexionMysql();
-        cn = conexion.getconexion();
-        LinkedList<P_Promociones> lista = new LinkedList<P_Promociones>();
+private static Connection cn;
+      private static   PreparedStatement ps;
+     private static    ResultSet rs;
+    public static LinkedList<P_Promociones> getPromoOfer() throws Exception {
+        
+        ConexionMysql con = new ConexionMysql();
+                LinkedList<P_Promociones> lista = new LinkedList<P_Promociones>();
         try {
+            con.Conectar();
+            cn = con.getCn();
             cn.setAutoCommit(false);
             ps = cn.prepareStatement("{call Sp_PromoOferta(0)}");
            rs = ps.executeQuery();
@@ -32,22 +33,21 @@ public class ListarPromociones {
             }
             rs.close();
             ps.close();
-            cn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            con.Cerrar();
         }
         return lista;
     }
 
-    public static LinkedList<P_Promociones> getPromoOferInicio() {
-        Connection cn;
-        PreparedStatement ps;
-        ResultSet rs;
-        ConexionMysql conexion = new ConexionMysql();
-        cn = conexion.getconexion();
+    public static LinkedList<P_Promociones> getPromoOferInicio() throws Exception {
+        ConexionMysql con = new ConexionMysql();
+        cn = con.getCn();
         LinkedList<P_Promociones> lista = new LinkedList<P_Promociones>();
         try {
-
+con.Conectar();
+cn=con.getCn();
             cn.setAutoCommit(false);
 
             ps = cn.prepareStatement("{call Sp_PromoOferta(1)}");
@@ -65,9 +65,10 @@ public class ListarPromociones {
             }
             rs.close();
             ps.close();
-            cn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            con.Cerrar();
         }
         return lista;
     }

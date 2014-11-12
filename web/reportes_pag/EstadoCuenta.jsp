@@ -1,31 +1,25 @@
-<%@page import="java.sql.Connection"%>
-<%@page import="Conexion.ConexionSql"%>
-<title> Bazar Central del Ejercito del Perú</title>
-<link rel="shortcut icon" href="images/BCEIco.ico"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="net.sf.jasperreports.engine.*" %> 
-<%@ page import="java.util.*" %> 
-<%@ page import="java.io.*" %> 
+<html>
+    <head>
+        <title> Bazar Central del Ejercito del Perú</title>
+    </head>
+    <body onload="ecc()">
+    <center><img src="http://host.campuseduca.net/wp-content/themes/admired/images/gif_carga.gif"/></center>
+ <script>
+function ecc(){
+   document.ecc.submit()
+}
+</script>
 <% 
- if( session.getAttribute("CodAnexo") != null){
-     Connection cn;
-ConexionSql con=new ConexionSql();
-cn=con.getConexion();
-File reportFile = new File(application.getRealPath("reportes/EstadoCuentaCliente.jasper")); 
- 
-Map parameters = new HashMap(); 
-parameters.put("CodAnexo", session.getAttribute("CodAnexo")); 
-byte[] bytes = JasperRunManager.runReportToPdf(reportFile.getPath (), parameters, cn); 
-/*Indicamos que la respuesta va a ser en formato PDF*/ 
-response.setContentType("application/pdf");
-response.setContentLength(bytes.length); 
-ServletOutputStream ouputStream = response.getOutputStream(); 
-ouputStream.write(bytes, 0, bytes.length); 
-/*Limpiamos y cerramos flujos de salida*/ 
-ouputStream.flush(); 
-ouputStream.close();
-con.cerrarConexion(cn);
+ if( session.getAttribute("CodAnexo") != null){%>
+<form  action="EstadoCuentaCliente" method="post" name="ecc">
+    <input type="hidden" name="id" id="id" value="<%=session.getAttribute("CodAnexo")%>"/> 
+</form>
+ <%   
 }else{
-     	response.sendRedirect("?content=inicio");
+System.out.println("<script> window.close(); </script>");
+System.out.println("Por favor inicie sesión...");
  }
 %>
+</body>
+</html>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstadoCuentaCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.2100000000000002"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="28"/>
+	<property name="ireport.x" value="58"/>
+	<property name="ireport.y" value="124"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#F0F0F0"/>
@@ -90,7 +90,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Luna\\Desktop\\Reportes\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\Users\\AlexDaniel\\Desktop\\ReporteWeb\\ReporteWeb\\web\\reportes\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[declare @idanexo int, @idEmpresa int, @codanexo VARCHAR (20) 
@@ -1183,7 +1183,7 @@ WHERE     (vAnexo_CodyNom.IdAnexo = @IdAnexo) AND (dbo.CreditoPeriodo.IdCreditoP
 				<textFieldExpression><![CDATA[$F{CodCreditoPeriodo6}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="18" y="333" width="63" height="12"/>
+				<reportElement x="18" y="333" width="62" height="12"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -1204,35 +1204,35 @@ WHERE     (vAnexo_CodyNom.IdAnexo = @IdAnexo) AND (dbo.CreditoPeriodo.IdCreditoP
 				<textFieldExpression><![CDATA[$F{Proyectado_1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="211" y="333" width="63" height="12"/>
+				<reportElement x="211" y="333" width="61" height="12"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="275" y="333" width="63" height="12"/>
+				<reportElement x="275" y="333" width="60" height="12"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="338" y="333" width="63" height="12"/>
+				<reportElement x="338" y="333" width="60" height="12"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_4}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="402" y="333" width="63" height="12"/>
+				<reportElement x="402" y="333" width="60" height="12"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proyectado_5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="465" y="333" width="63" height="12"/>
+				<reportElement x="465" y="333" width="61" height="12"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -1268,15 +1268,15 @@ WHERE     (vAnexo_CodyNom.IdAnexo = @IdAnexo) AND (dbo.CreditoPeriodo.IdCreditoP
 		<band height="4" splitType="Stretch"/>
 	</pageHeader>
 	<detail>
-		<band height="42">
+		<band height="123">
 			<elementGroup/>
 			<subreport>
-				<reportElement x="14" y="0" width="526" height="40"/>
+				<reportElement x="11" y="0" width="311" height="106"/>
 				<subreportParameter name="CodAnexo">
 					<subreportParameterExpression><![CDATA[$P{CodAnexo}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["EstadoCuentaCliente_subreport1.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "EstadoCuentaCliente_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

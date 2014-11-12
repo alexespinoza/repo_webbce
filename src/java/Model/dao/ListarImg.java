@@ -8,16 +8,16 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 
 public class ListarImg {
-
-    public static LinkedList<P_Imagenes> getImg() {
-        Connection cn;
-        PreparedStatement ps;
-        ResultSet rs;
-        ConexionMysql conexion = new ConexionMysql();
-        cn = conexion.getconexion();
+    private static Connection cn;
+    private static     PreparedStatement ps;
+    private static     ResultSet rs;
+    public static LinkedList<P_Imagenes> getImg() throws Exception {
+            ConexionMysql con = new ConexionMysql();
+        
         LinkedList<P_Imagenes> lista = new LinkedList<P_Imagenes>();
         try {
-
+            con.Conectar();
+cn = con.getCn();
             cn.setAutoCommit(false);
 
             ps = cn.prepareStatement("{call Sp_Imagenes('TIENDA')}");
@@ -36,22 +36,21 @@ public class ListarImg {
             }
             rs.close();
             ps.close();
-            cn.close();
-        } catch (Exception e) {
+                 } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            con.Cerrar();
         }
         return lista;
     }
 
-    public static LinkedList<P_Imagenes> getImgActividades(int id) {
-        Connection cn;
-        PreparedStatement ps;
-        ResultSet rs;
-        ConexionMysql conexion = new ConexionMysql();
-        cn = conexion.getconexion();
-        LinkedList<P_Imagenes> lista = new LinkedList<P_Imagenes>();
+    public static LinkedList<P_Imagenes> getImgActividades(int id) throws Exception {
+      
+        ConexionMysql con = new ConexionMysql();
+                LinkedList<P_Imagenes> lista = new LinkedList<P_Imagenes>();
         try {
-
+   con.Conectar();
+cn = con.getCn();
             cn.setAutoCommit(false);
             ps = cn.prepareStatement("SELECT idimagenes,imagenes.img,actividades.nombre titulo FROM imagenes "
                     + "INNER JOIN actividades ON actividades.idactividades = imagenes.idactividades "
@@ -66,22 +65,21 @@ public class ListarImg {
             }
             rs.close();
             ps.close();
-            cn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            con.Cerrar();
         }
         return lista;
     }
 
-    public static LinkedList<P_Imagenes> getImgNoticias(int id) {
-        Connection cn;
-        PreparedStatement ps;
-        ResultSet rs;
-        ConexionMysql conexion = new ConexionMysql();
-        cn = conexion.getconexion();
-        LinkedList<P_Imagenes> lista = new LinkedList<P_Imagenes>();
+    public static LinkedList<P_Imagenes> getImgNoticias(int id) throws Exception {
+   
+        ConexionMysql con = new ConexionMysql();
+              LinkedList<P_Imagenes> lista = new LinkedList<P_Imagenes>();
         try {
-
+   con.Conectar();
+cn = con.getCn();
             cn.setAutoCommit(false);
             ps = cn.prepareStatement("SELECT idimagenes,imagenes.img,noticias.nombre titulo FROM imagenes "
                     + "INNER JOIN noticias ON noticias.idnoticias = imagenes.idnoticias "
@@ -96,9 +94,10 @@ public class ListarImg {
             }
             rs.close();
             ps.close();
-            cn.close();
-        } catch (Exception e) {
+         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            con.Cerrar();
         }
         return lista;
     }

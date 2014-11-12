@@ -10,18 +10,17 @@ import java.util.LinkedList;
 
 
 public class ListarTiendas {
-    public static LinkedList<P_tiendas> getTiendas()
+  private static Connection cn;
+      private static   PreparedStatement ps;
+      private static  ResultSet rs;
+    public static LinkedList<P_tiendas> getTiendas() throws Exception
     {
-
-    
-     Connection cn;
-      PreparedStatement ps;
-     ResultSet rs;
-        ConexionMysql conexion=new ConexionMysql();
-            cn =   conexion.getconexion();
+ ConexionMysql con=new ConexionMysql();
+            cn =   con.getCn();
                LinkedList<P_tiendas> lista=new LinkedList<P_tiendas>();
    try {
- 
+ con.Conectar();
+ cn=con.getCn();
             cn.setAutoCommit(false);
 
             ps = cn.prepareStatement("{call Sp_Tiendas()}");
@@ -44,10 +43,11 @@ public class ListarTiendas {
             }
           rs.close();
          ps.close();
-         cn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        } finally{
+       con.Cerrar();
+   }
         return lista;
     }
 }

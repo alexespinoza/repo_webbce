@@ -7,15 +7,18 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 
 public class ListarActividades {
-    public static LinkedList<P_Actividad> getActividades(String valor)
+         private static Connection cn;
+          private  static PreparedStatement ps;
+          private  static ResultSet rs;
+          
+     public static LinkedList<P_Actividad> getActividades(String valor) throws Exception
     {
-Connection cn;
-      PreparedStatement ps;
-     ResultSet rs;
-        ConexionMysql conexion=new ConexionMysql();
-            cn =   conexion.getconexion();
+
+        ConexionMysql con=new ConexionMysql();
                LinkedList<P_Actividad> lista=new LinkedList<P_Actividad>();
    try {
+       con.Conectar();
+       cn=con.getCn();
  String descripcion;
  if(valor=="1"){
      descripcion = "concat(left(descripcion,150), '...') descripcion";
@@ -36,10 +39,11 @@ ps = cn.prepareStatement("SELECT idactividades,titulo,nombre, "+descripcion+", u
 }
           rs.close();
          ps.close();
-         cn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        } finally{
+       con.Cerrar();
+   }
         return lista;
     }
         
