@@ -31,7 +31,7 @@ response.setContentType("application/pdf");
      con = new ConexionSql();
             cn = con.getConexion();
   ServletOutputStream out = response.getOutputStream();
-JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("reportes/EstadoCuentaCliente.jasper"));
+JasperReport reporte = (JasperReport) JRLoader.loadObject(getServletContext().getRealPath("reportes/ECC.jasper"));
 Map parametros = new HashMap();
 parametros.put("CodAnexo", CodAnexo);
 JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametros, cn);
@@ -61,10 +61,6 @@ out.close();
         processRequest(request, response);
     }
 
-    @Override
-    public String getServletInfo()
-    {
-        return "Reportes";
-    }
+   
     
 }
